@@ -152,11 +152,8 @@ body{
   to { opacity: 0; }
 }
 
-.cmd-txt  {
-  color: #506F95;
-}
-
-.commandresult {
+:global(.commandresult)
+{
 position: relative;
 color: #506F95;
 }
@@ -166,35 +163,42 @@ color: #506F95;
 </style>
 
 <script>
-let input = document.querySelector('.txt-input');
-let content = document.querySelector('.content');
+let input = document.querySelector('.txt-input')as HTMLInputElement;
+let content = document.querySelector('.content')as HTMLElement;
 let clear = document.getElementsByClassName('.clear');
-var directory
-var directories_home
-var directories_pictures
-var directories_documents
-var directories_desktop
+
+var directory: string
+let directories_home: string[] = ['Desktop', ' Documents', ' Pictures', ' Videos'];
+let directories_pictures: string[] = ['Photo1.jpg', ' Photo2.png'];
+let directories_documents: string[] = ['CV.txt', ' privatekey.key', ' publickey.key.pub'];
+let directories_desktop: string[] = ['Homework', ' helloworld.txt'];
+let directories_homework: string[] = ['tysm.txt'];
+let directories_videos: string[] = ['Nevergonnagiveyouup.mp4'];
+
+directory = "Home"
 
 
 input?.addEventListener('keydown', handleCommand);
 
-
-function handleCommand(event) {
+function handleCommand(event: any) {
     if(event.key === 'Enter') {
-      if (input !== null) {
-        console.log("enterpressed")
-        const command = input.value.trim();
-        input.value = '';
-        if (content === null) {
-        return}
-        content.innerHTML += `$ ${command}<br>`;
-        executeCommand(command);
-    }
+        if (input !== null) {
+            console.log("enterpressed")
+            const command = input.value
+            console.log(content.innerHTML) 
+            console.log(content.innerHTML)
+            const args = command.split(" ").filter(value => value.length > 0)
+            content.innerHTML += `<p> $ ${command}<br></p>`;
+            executeCommand(args)
+            input.value = ""
+        }
     }
 }
 
-function executeCommand(command: any) {
-    switch (command) {
+
+function executeCommand(args:string[]) {
+  console.log(directory)  
+  switch (args[0]) {
         case "help":
         if (content === null) {
         return}
@@ -236,12 +240,6 @@ function executeCommand(command: any) {
 
           break;
 
-      case "pwd":
-        if (content === null) {
-        return}
-        content.innerHTML += '<p class=" /home/guest"></p><br>';
-        break;
-
         case "demo":
         if (content === null) {
         return}
@@ -253,11 +251,224 @@ function executeCommand(command: any) {
         return}
         content.innerHTML += '<p class="commandresult">underconstuction</p><br>';
         break;
+
+        case "sources":
+        if (content === null) {
+        return}
+        content.innerHTML += '<p class="commandresult">underconstuction</p><br>';
+        break;
+
+/// begin variables, my personal hell for what i suspect will be the next month
+
+        case "pwd":
+        if (content === null) {
+        return}
+        if (directory == "Home") {
+        content.innerHTML += '<p class="commandresult">/home/guest</p><br>';
+        console.log(directory)
+        }
+        if (content === null) {
+        return}
+        if (directory == "Pictures") {
+        content.innerHTML += '<p class="commandresult">/home/guest/Pictures</p><br>';
+        console.log(directory)
+        }        
+        if (content === null) {
+        return}
+        if (directory == "Documents") {
+        content.innerHTML += '<p class="commandresult">/home/guest/Documents</p><br>';
+        console.log(directory)
+        }
+        if (content === null) {
+        return}
+        if (directory == "Desktop") {
+        content.innerHTML += '<p class="commandresult">/home/guest/Desktop</p><br>';
+        }
+        if (content === null) {
+        return}
+        if (directory == "Videos") {
+        content.innerHTML += '<p class="commandresult">/home/guest/Videos</p><br>';
+        }
+        if (content === null) {
+        return}
+        if (directory == "Homework") {
+          console.log(directory)
+        content.innerHTML += '<p class="commandresult">/home/guest/Desktop/Homework</p><br>';
+        }
+        break;
         
+        case "ls":
+        if (content === null) {
+        return}
+        if (directory == "Home") {
+        content.innerHTML += `${directories_home}<br>`;
+        console.log(directory)
+        }
+        if (content === null) {
+        return}
+        if (directory == "Pictures") {
+        content.innerHTML += `${directories_pictures}<br>`;
+        console.log(directory)
+        }        
+        if (content === null) {
+        return}
+        if (directory == "Documents") {
+        content.innerHTML += `${directories_documents}<br>`;
+        console.log(directory)
+        }
+        if (content === null) {
+        return}
+        if (directory == "Desktop") {
+        content.innerHTML += `${directories_desktop}<br>`;
+        }
+        if (content === null) {
+        return}
+        if (directory == "Videos") {
+        content.innerHTML += `${directories_videos}<br>`;
+        }
+        if (content === null) {
+        return}
+        if (directory == "Homework") {
+          console.log(directory)
+        content.innerHTML += `${directories_homework}<br>`;
+        }
+        break;
+        
+              case "cd":
+              switch (args[1]) {
+                case "Home":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest"</p>';
+              break;
+                case "Pictures":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              if (directory == "Home") {
+              directory = "Pictures"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Pictures</p>';
+              }
+              else {
+              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Pictures"</p>';
+              }
+              break;
+                case "Desktop":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              if (directory == "Home") {
+              directory = "Desktop"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop</p>';
+              }
+              else {
+              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Desktop"</p>';
+              }
+              break;
+                case "Documents":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              if (directory == "Home") {
+              directory = "Documents"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Documents</p>';
+              }
+              else{
+              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Documents"</p>';
+              }
+              break;
+                case "Videos":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              if (directory == "Home") {
+              directory = "Videos"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Videos</p>';
+              }
+              else{
+              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Videos"</p>';
+              }
+              break;
+                case "Homework":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              if (directory == "Desktop") {
+              directory = "Homework"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop/Homework</p>';
+              }
+              else{
+              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Desktop/Homework"</p>';
+              }
+              break;
+                case "/Home/guest":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              directory = "Home"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest</p>';
+              break;
+                case "/Home/guest/Pictures":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              directory = "Pictures"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Pictures</p>';
+              break;
+                case "/Home/guest/Desktop":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              directory = "Desktop"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop</p>';
+              break;
+                case "/Home/guest/Documents":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              directory = "Documents"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Documents</p>';
+              break;
+                case "/Home/guest/Videos":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              directory = "Videos"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Videos</p>';
+              break;
+                case "/Home/guest/Desktop/Homework":
+              if (content === null) {
+              return}
+              console.log(args[1])
+              directory = "Homework"
+              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop/Homework</p>';
+              break;
+
+              default:
+              if (content === null) {
+                      return}
+                  content.innerHTML += `No such file or directory called ${args[1]} in this folder, type ls for a list of folders, or use "cd /Home/guest" to go back to Home.<br>`;
+                  break;
+              }
+        break;
+
+
+
+
+
+
+        
+
+
+
+
+
+
         default:
         if (content === null) {
                 return}
-            content.innerHTML += `Unknown command: ${command}, for a list of commands type help.<br>`;
+            content.innerHTML += `Unknown command: ${args[0]}, for a list of commands type help.<br>`;
             break;
     }
 }
