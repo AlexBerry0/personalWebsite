@@ -152,17 +152,17 @@ body{
   to { opacity: 0; }
 }
 
-:global(.commandresult)
-{
-position: relative;
-color: #506F95;
+.welcome-txt {
+    position: relative;
+    padding-bottom: 0.4em;
+    color: 	#DB6A6C;
 }
-
-
 
 </style>
 
 <script>
+import type { AstroConfigSchema } from "astro/dist/core/config";
+
 let input = document.querySelector('.txt-input')as HTMLInputElement;
 let content = document.querySelector('.content')as HTMLElement;
 let clear = document.getElementsByClassName('.clear');
@@ -177,6 +177,9 @@ let directories_videos: string[] = ['Nevergonnagiveyouup.mp4'];
 
 directory = "Home"
 
+function sleep(ms:any) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 input?.addEventListener('keydown', handleCommand);
 
@@ -196,9 +199,9 @@ function handleCommand(event: any) {
 }
 
 
-function executeCommand(args:string[]) {
+async function executeCommand(args:string[]) {
   console.log(directory)  
-  switch (args[0]) {
+  switch (args[0].toLowerCase()) {
         case "help":
         if (content === null) {
         return}
@@ -212,30 +215,25 @@ function executeCommand(args:string[]) {
                 const before = document.getElementById("clear");
               }, 1);
             break;
-          case "CV":
+          case "cv":
         if (content === null) {
         return}
         content.innerHTML += '<p class="commandresult"><a href="https://drive.google.com/file/d/1KHfj9ISs_SBIRM0iVSVFcBUlefUYkdab/view?">Here is a link to my CV.<a> I would happily accept advice or if however unlikely you are an emplyeer a job offer. <a href="mailto:me@alex-berry.net">Just email me<a></p><br>';
             break;   
         case "aboutme":
-            let aboutMe = document.createElement('div');
-            aboutMe.classList.add('about-me');
-            aboutMe.innerHTML =
+
+        content.innerHTML +=
+            `<p class="commandresult">Welcome to my website. I am Alex, a WHS student in year 11 in NZ. </p>
             `
-            <span class="commandresult"><br>Welcome to my website. I'm Alex, a WHS student in year 11 in NZ. <br>
-            I created this website as a kind of portfolio of my tech projects as I discovered that for some of them there isn't really a guide.
-            <br>Anyway, heres some other links to my profiles and my email.
-            <br><a href="https://github.com/AlexBerry0">Github<a>
+            await sleep(2000)
+            content.innerHTML += `<p class="commandresult">I created this website as a kind of portfolio of my tech projects as I discovered that for some of them there isn't really a guide. </p> `
+            await sleep(2000)
+            content.innerHTML += `<p class="commandresult"><p class="commandresult">Anyway, heres some other links to my profiles and my email.</p>`
+            await sleep(2000)
+            content.innerHTML += `
+            <a href="https://github.com/AlexBerry0">Github<a>
             <br><a href="https://instagram.com/alex_berry_0">Instagram<a>
-            <br><a href="mailto:me@alex-berry.net">Email<a>
-              </div>
-            `
-            if (content === null) {
-                return}
-                if (input === null) {
-                return}
-            content.appendChild(aboutMe);
-            input.value = '';
+            <br><a href="mailto:me@alex-berry.net">Email<a>`
             break;
 
           break;
@@ -301,36 +299,36 @@ function executeCommand(args:string[]) {
         if (content === null) {
         return}
         if (directory == "Home") {
-        content.innerHTML += `${directories_home}<br>`;
+        content.innerHTML += `<p class="commandresult">${directories_home}<br></p>`;
         console.log(directory)
         }
         if (content === null) {
         return}
         if (directory == "Pictures") {
-        content.innerHTML += `${directories_pictures}<br>`;
+        content.innerHTML += `<p class="commandresult">${directories_pictures}<br></p>`;
         console.log(directory)
         }        
         if (content === null) {
         return}
         if (directory == "Documents") {
-        content.innerHTML += `${directories_documents}<br>`;
+        content.innerHTML += `<p class="commandresult">${directories_documents}<br></p>`;
         console.log(directory)
         }
         if (content === null) {
         return}
         if (directory == "Desktop") {
-        content.innerHTML += `${directories_desktop}<br>`;
+        content.innerHTML += `<p class="commandresult">${directories_desktop}<br></p>`;
         }
         if (content === null) {
         return}
         if (directory == "Videos") {
-        content.innerHTML += `${directories_videos}<br>`;
+        content.innerHTML += `<p class="commandresult">${directories_videos}<br></p>`;
         }
         if (content === null) {
         return}
         if (directory == "Homework") {
           console.log(directory)
-        content.innerHTML += `${directories_homework}<br>`;
+        content.innerHTML += `<p class="commandresult">${directories_homework}<br></p>`;
         }
         break;
         
@@ -448,7 +446,7 @@ function executeCommand(args:string[]) {
               default:
               if (content === null) {
                       return}
-                  content.innerHTML += `No such file or directory called ${args[1]} in this folder, type ls for a list of folders, or use "cd /Home/guest" to go back to Home.<br>`;
+                  content.innerHTML += `<p class="commandresult">No such file or directory called ${args[1]} in this folder, type ls for a list of folders, or use "cd /Home/guest" to go back to Home.<br></p>`;
                   break;
               }
         break;
