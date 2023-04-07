@@ -225,16 +225,12 @@ async function executeCommand(args:string[]) {
         content.innerHTML +=
             `<p class="commandresult">Welcome to my website. I am Alex, a WHS student in year 11 in NZ. </p>
             `
-            await sleep(2000)
             content.innerHTML += `<p class="commandresult">I created this website as a kind of portfolio of my tech projects as I discovered that for some of them there isn't really a guide. </p> `
-            await sleep(2000)
             content.innerHTML += `<p class="commandresult"><p class="commandresult">Anyway, heres some other links to my profiles and my email.</p>`
-            await sleep(2000)
             content.innerHTML += `
             <a href="https://github.com/AlexBerry0">Github<a>
             <br><a href="https://instagram.com/alex_berry_0">Instagram<a>
             <br><a href="mailto:me@alex-berry.net">Email<a>`
-            break;
 
           break;
 
@@ -255,8 +251,6 @@ async function executeCommand(args:string[]) {
         return}
         content.innerHTML += '<p class="commandresult">underconstuction</p><br>';
         break;
-
-/// begin variables, my personal hell for what i suspect will be the next month
 
         case "pwd":
         if (content === null) {
