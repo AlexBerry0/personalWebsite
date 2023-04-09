@@ -1,39 +1,74 @@
-<section class="terminal">
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
 
+const posts = (await getCollection('blog')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+---
+
+<section class="terminal">
+<br>
     <p class="welcomecommand"><span class="guest">guest</span>@alex-berry.net:~$ welcome</p>
+    <br>
     <div class="asciime">
-                           llcccccclll 
-                         lolllccc clllllc 
-                        oolloodkO0kdoooll 
-                      cll ood0NNNXOol  olc  
-                     cllc lookKNNX0kxl  lllc  
-                  ooclll  lkxkKNX0kkko  lolllc  
-                  lllloo  o0KXNNK0KXKd  loooollc  
-                 ccclllo  lOXXXXKKXNKo  loooolllc 
-                ccccllcl   lOXXXXXX0d  cllooolllc 
-               ccllllccc    dO0000Oo    llooooooc 
-               cllolllc,.  .cxkkkkxl     ccloooc 
-               cllllloc,.   .,.ol.'..   ., ccllllc  
-               cccl...,..  .............,,'',lllc 
-              ,..''..''.......................'lcl 
-             ,................................., 
-             ..................................' 
-            '...................................,
-            ....................................' 
-           '.....................................,
-          ,......................................' 
-          '.......................................      
+    llcccccclll 
+    lolllccc clllllc 
+   oolloodkO0kdoooll 
+   cll ood0NNNXOol  olc  
+   cllc lookKNNX0kxl  lllc  
+   ooclll  lkxkKNX0kkko  lolllc  
+    llllooo  O0KXNNK0KXKd  loooollc  
+   ccclllo  lOXXXXKKXNKo  loooolllc 
+   ccccllcl   lOXXXXXX0d  cllooolllc 
+  ccllllccc    dO0000Oo    llooooooc 
+  cllolllc,.  .cxkkkkxl     ccloooc 
+  cllllloc,.   .,.ol.'..   ., ccllllc  
+  cccl...,..  .............,,'',lllc 
+,..''..''.......................'lcl 
+,................................., 
+..................................' 
+'...................................,
+....................................' 
+'.....................................,
+,......................................' 
+'.......................................
         </div>
         <div class="welcometxt">
-                    Hi, I'm Alex.
-                Welcome to my website. 
+Hi, I'm Alex.
+</div>
+<div class="welcometxt">
+Welcome to my website. 
+</div>
+<div class="welcometxt">
 It's not good but it's something. Which is what matters I guess.
-You can use the command aboutme to find out more about me.
         </div>
-        <div class="txtt">
-            <p class="frlistofcmds"><br>For a list of the commands, type help
-              <span class="help-txt">"help"</span> .</p>
-        </div> 
+        <br>
+        <p class="welcomecommand"><span class="guest">guest</span>@alex-berry.net:~$ blogposts</p>
+        <br>
+        <div class="welcometxt">
+Here are a list of blog posts (and some tutorials) for the projects I've done:
+</div>
+<br>
+        <section>
+          <ul>
+            {
+              posts.map((post) => (
+                <li>
+                  <FormattedDate date={post.data.pubDate} />
+                   - 
+                  <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+        <br>
+            <p class="frlistofcmds"><br>For a list of the commands, type
+              <span class="help-txt">"help"</span>, for some info about me, type
+                <span class="help-txt">"aboutme"</span>.</p>
 
     <div class="content"></div>
 
@@ -41,7 +76,7 @@ You can use the command aboutme to find out more about me.
     <div id="txt">
       <p class="path">guest@alex-berry.net:~$</p>
       <div class="cursor">
-        <input type="text" class="txt-input">
+        <input type="text" class="txt-input" autofocus >
         <i></i>
       </div>
     </div>
@@ -49,56 +84,55 @@ You can use the command aboutme to find out more about me.
 
 </section>
 
-<style>
-*{
+<style >
+:global(*){
     margin: 0;
     padding: 0;
-    overflow: hidden;
     font-family: 'Inconsolata', monospace;
     background: #211D1B;
     position: relative;
+    
+}
+
+.terminal{
+ padding: 50px ;
 }
 
 a {
-  color: #34be5b;
+  color: #1793d0;
 }
 
 body{
     color: #34be5b;
     background: #211D1B;
-    padding: 15px 20px;
-    height: 100vh;
     width: 100vw;
 }
 
 .welcomecommand {
    display: block;
-   margin: 5%;
    position: relative;
 }
 
-.asciime{
+:global(.asciime){
     position: relative;
     font-family: monospace;
     white-space: pre;
     font-size: 1.5em;
     color: #1793d0;
+    text-align: center;
 }
 
-.welcometxt{
+:global(.welcometxt){
     position: relative;
     font-family: monospace;
-    white-space: pre;
-    margin-left: 0;
-    font-size: 1.5em;
+    font-size: 1.25em;
     color: #ffb6c1;
+    text-align: center;
 }
 
 .txtt {
     display: relative;
     margin: 0;
-    overflow: hidden;
-    white-space: nowrap;
     letter-spacing: 0.05em; 
     width: max-content;
 }
@@ -107,6 +141,7 @@ body{
     position: relative;
     padding-bottom: 0.4em;
     color: 	#DB6A6C;
+    text-align: left;
 }
 
 .help-txt {
@@ -121,20 +156,24 @@ body{
 .txt-input {
   margin-top: 1px;
   margin-left: 7px;
+  width: 100%;
   outline: none;
   border: none;
   background-color: transparent;
-  color: #506F95;
+  color: #1793d0;
   font-size: 1em;
+  flex: 1;
 }
 
 .cursor {
   position: relative;
+  flex: 1;
+  display: flex;
 }
 .cursor i {
   position: absolute;
   width: 10px;
-  height: 200%;
+  height: 100%;
   background-color: gray;
   left: 5px;
   animation-name: blink;
@@ -157,8 +196,15 @@ body{
     padding-bottom: 0.4em;
     color: 	#DB6A6C;
 }
+ ul{
+  list-style-type:none ;
+  color: 	#1793d0;
+  padding-left: 30%;
+ }
 
 </style>
+
+
 
 <script>
 import type { AstroConfigSchema } from "astro/dist/core/config";
@@ -203,8 +249,7 @@ async function executeCommand(args:string[]) {
   console.log(directory)  
   switch (args[0].toLowerCase()) {
         case "help":
-        if (content === null) {
-        return}
+        
         content.innerHTML += '<p class="commandresult">Available commands: help, clear, aboutme, neofetch, pwd, CV, ls, sources.</p><br>';
             break;
         case "clear":
@@ -216,8 +261,7 @@ async function executeCommand(args:string[]) {
               }, 1);
             break;
           case "cv":
-        if (content === null) {
-        return}
+        
         content.innerHTML += '<p class="commandresult"><a href="https://drive.google.com/file/d/1KHfj9ISs_SBIRM0iVSVFcBUlefUYkdab/view?">Here is a link to my CV.<a> I would happily accept advice or if however unlikely you are an emplyeer a job offer. <a href="mailto:me@alex-berry.net">Just email me<a></p><br>';
             break;   
         case "aboutme":
@@ -235,54 +279,95 @@ async function executeCommand(args:string[]) {
           break;
 
         case "demo":
-        if (content === null) {
-        return}
+        
         content.innerHTML += '<p class="commandresult">demo</p><br>';
         break;
         
         case "neofetch":
-        if (content === null) {
-        return}
+        
         content.innerHTML += '<p class="commandresult">underconstuction</p><br>';
         break;
 
         case "sources":
-        if (content === null) {
-        return}
+        
         content.innerHTML += '<p class="commandresult">underconstuction</p><br>';
         break;
 
+        case "welcome":
+        
+        content.innerHTML += `
+        <section class="terminal">
+<br>
+    <p class="welcomecommand"><span class="guest">guest</span>@alex-berry.net:~$ welcome</p>
+    <br>
+    <div class="asciime">
+    llcccccclll 
+    lolllccc clllllc 
+   oolloodkO0kdoooll 
+   cll ood0NNNXOol  olc  
+   cllc lookKNNX0kxl  lllc  
+   ooclll  lkxkKNX0kkko  lolllc  
+    llllooo  O0KXNNK0KXKd  loooollc  
+   ccclllo  lOXXXXKKXNKo  loooolllc 
+   ccccllcl   lOXXXXXX0d  cllooolllc 
+  ccllllccc    dO0000Oo    llooooooc 
+  cllolllc,.  .cxkkkkxl     ccloooc 
+  cllllloc,.   .,.ol.'..   ., ccllllc  
+  cccl...,..  .............,,'',lllc 
+,..''..''.......................'lcl 
+,................................., 
+..................................' 
+'...................................,
+....................................' 
+'.....................................,
+,......................................' 
+'.......................................
+        </div>
+        <div class="welcometxt">
+Hi, I'm Alex.
+</div>
+<div class="welcometxt">
+Welcome to my website. 
+</div>
+<div class="welcometxt">
+It's not good but it's something. Which is what matters I guess.
+        </div>
+        
+        
+        
+        `;
+        break;
+
+        case "blogposts":
+        
+        content.innerHTML += `<p class="commandresult">I'm sorry, I have tried for over 2 hours, making this command repeatable is just too hard, maybe in the future I will fix it but for now I can't be bothered. TYSM for understanding.</p><br>`;
+        break;
+
         case "pwd":
-        if (content === null) {
-        return}
+        
         if (directory == "Home") {
         content.innerHTML += '<p class="commandresult">/home/guest</p><br>';
         console.log(directory)
         }
-        if (content === null) {
-        return}
+        
         if (directory == "Pictures") {
         content.innerHTML += '<p class="commandresult">/home/guest/Pictures</p><br>';
         console.log(directory)
         }        
-        if (content === null) {
-        return}
+        
         if (directory == "Documents") {
         content.innerHTML += '<p class="commandresult">/home/guest/Documents</p><br>';
         console.log(directory)
         }
-        if (content === null) {
-        return}
+        
         if (directory == "Desktop") {
         content.innerHTML += '<p class="commandresult">/home/guest/Desktop</p><br>';
         }
-        if (content === null) {
-        return}
+        
         if (directory == "Videos") {
         content.innerHTML += '<p class="commandresult">/home/guest/Videos</p><br>';
         }
-        if (content === null) {
-        return}
+        
         if (directory == "Homework") {
           console.log(directory)
         content.innerHTML += '<p class="commandresult">/home/guest/Desktop/Homework</p><br>';
@@ -290,53 +375,45 @@ async function executeCommand(args:string[]) {
         break;
         
         case "ls":
-        if (content === null) {
-        return}
+        
         if (directory == "Home") {
         content.innerHTML += `<p class="commandresult">${directories_home}<br></p>`;
         console.log(directory)
         }
-        if (content === null) {
-        return}
+        
         if (directory == "Pictures") {
         content.innerHTML += `<p class="commandresult">${directories_pictures}<br></p>`;
         console.log(directory)
         }        
-        if (content === null) {
-        return}
+        
         if (directory == "Documents") {
         content.innerHTML += `<p class="commandresult">${directories_documents}<br></p>`;
         console.log(directory)
         }
-        if (content === null) {
-        return}
+        
         if (directory == "Desktop") {
         content.innerHTML += `<p class="commandresult">${directories_desktop}<br></p>`;
         }
-        if (content === null) {
-        return}
+        
         if (directory == "Videos") {
         content.innerHTML += `<p class="commandresult">${directories_videos}<br></p>`;
         }
-        if (content === null) {
-        return}
+        
         if (directory == "Homework") {
           console.log(directory)
         content.innerHTML += `<p class="commandresult">${directories_homework}<br></p>`;
         }
         break;
         
+
+
               case "cd":
               switch (args[1]) {
                 case "Home":
-              if (content === null) {
-              return}
               console.log(args[1])
               content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest"</p>';
               break;
                 case "Pictures":
-              if (content === null) {
-              return}
               console.log(args[1])
               if (directory == "Home") {
               directory = "Pictures"
@@ -347,8 +424,6 @@ async function executeCommand(args:string[]) {
               }
               break;
                 case "Desktop":
-              if (content === null) {
-              return}
               console.log(args[1])
               if (directory == "Home") {
               directory = "Desktop"
@@ -359,8 +434,6 @@ async function executeCommand(args:string[]) {
               }
               break;
                 case "Documents":
-              if (content === null) {
-              return}
               console.log(args[1])
               if (directory == "Home") {
               directory = "Documents"
@@ -371,8 +444,6 @@ async function executeCommand(args:string[]) {
               }
               break;
                 case "Videos":
-              if (content === null) {
-              return}
               console.log(args[1])
               if (directory == "Home") {
               directory = "Videos"
@@ -383,8 +454,6 @@ async function executeCommand(args:string[]) {
               }
               break;
                 case "Homework":
-              if (content === null) {
-              return}
               console.log(args[1])
               if (directory == "Desktop") {
               directory = "Homework"
@@ -395,43 +464,31 @@ async function executeCommand(args:string[]) {
               }
               break;
                 case "/Home/guest":
-              if (content === null) {
-              return}
               console.log(args[1])
               directory = "Home"
               content.innerHTML += '<p class="commandresult">You are now in /Home/guest</p>';
               break;
                 case "/Home/guest/Pictures":
-              if (content === null) {
-              return}
               console.log(args[1])
               directory = "Pictures"
               content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Pictures</p>';
               break;
                 case "/Home/guest/Desktop":
-              if (content === null) {
-              return}
               console.log(args[1])
               directory = "Desktop"
               content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop</p>';
               break;
                 case "/Home/guest/Documents":
-              if (content === null) {
-              return}
               console.log(args[1])
               directory = "Documents"
               content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Documents</p>';
               break;
                 case "/Home/guest/Videos":
-              if (content === null) {
-              return}
               console.log(args[1])
               directory = "Videos"
               content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Videos</p>';
               break;
                 case "/Home/guest/Desktop/Homework":
-              if (content === null) {
-              return}
               console.log(args[1])
               directory = "Homework"
               content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop/Homework</p>';
@@ -449,17 +506,7 @@ async function executeCommand(args:string[]) {
 
 
 
-
-        
-
-
-
-
-
-
         default:
-        if (content === null) {
-                return}
             content.innerHTML += `Unknown command: ${args[0]}, for a list of commands type help.<br>`;
             break;
     }
