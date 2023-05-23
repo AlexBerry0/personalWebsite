@@ -1,328 +1,473 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../components/FormattedDate.astro';
+import BaseHead from "../components/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import FormattedDate from "../components/FormattedDate.astro";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+const posts = (await getCollection("blog")).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 );
 ---
 
+<!-- Intro text/Welcome command -->
 <section class="terminal">
-<br>
-    <p class="welcomecommand"><span class="guest">guest</span>@alex-berry.net:~$ welcome</p>
-    <br>
-    <div class="asciime">
-    llcccccclll 
-    lolllccc clllllc 
-   oolloodkO0kdoooll 
-   cll ood0NNNXOol  olc  
-   cllc lookKNNX0kxl  lllc  
-   ooclll  lkxkKNX0kkko  lolllc  
-    llllooo  O0KXNNK0KXKd  loooollc  
-   ccclllo  lOXXXXKKXNKo  loooolllc 
-   ccccllcl   lOXXXXXX0d  cllooolllc 
-  ccllllccc    dO0000Oo    llooooooc 
-  cllolllc,.  .cxkkkkxl     ccloooc 
-  cllllloc,.   .,.ol.'..   ., ccllllc  
-  cccl...,..  .............,,'',lllc 
-,..''..''.......................'lcl 
-,................................., 
-..................................' 
-'...................................,
-....................................' 
-'.....................................,
-,......................................' 
-'.......................................
-        </div>
-        <div class="welcometxt">
-Hi, I'm Alex.
-</div>
-<div class="welcometxt">
-Welcome to my website. 
-</div>
-<div class="welcometxt">
-It's not good but it's something. Which is what matters I guess.
-        </div>
-        <br>
-        <p class="welcomecommand"><span class="guest">guest</span>@alex-berry.net:~$ blogposts</p>
-        <br>
-        <div class="welcometxt">
-Here are a list of blog posts (and some tutorials) for the projects I've done:
-</div>
-<br>
-        <section>
-          <ul>
-            {
-              posts.map((post) => (
-                <li>
-                  <FormattedDate date={post.data.pubDate} />
-                   - 
-                  <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
-                </li>
-              ))
-            }
-          </ul>
-        </section>
-        <br>
-            <p class="frlistofcmds"><br>For a list of the commands, type
-              <span class="help-txt">"help"</span>, for some info about me, type
-                <span class="help-txt">"aboutme"</span>.</p>
+  <br />
+  <!--Fake text that shows that the welcome command has been entered-->
+  <p class="welcomecommand">
+    <span class="guest">guest</span>@alex-berry.net:~$ welcome
+  </p>
+  <br />
 
-    <div class="content"></div>
+  <!--ascii art of my face-->
+  <div class="asciime">
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▒▒▒▓▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▒▒▒▓▒▒▒▒▒▒▒▓▒▒▒▒▓▓▒▒▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▒▓▓▒▒▒▒▒▒▓▓▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▓▒▒▒▒▓▓▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▒▒▒▒▓▓▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▒▓▒▒▒▓▓▒▒▒▒▒▓▓▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▓▓▓▒▒▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▒▓▓▒▒▒▓▓▓▒▓▓▓▒▒&nbsp&nbsp▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▒▒▒▒▓▓▒▒▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▓▓▒▒▒▓▓▓▓▓▒▒▒▒▓▒▒▒&nbsp&nbsp&nbsp▒▒▒▓▒▓▒▒▒▓▓▓▒▒▒▒▒▒▒▒▒▒▒▓▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▓▓▓▓▓▒▒▒▒▓▓▓▓▓▒▒▒&nbsp▒▒▒&nbsp&nbsp&nbsp&nbsp▒▒&nbsp▒▒▒&nbsp▒▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▒▒▓▓▒▒▒▒▒▒▒▓▓▓▓▓▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp▒▒&nbsp▒▒▒▒&nbsp▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▒▒▒▒▓▓▒▒▒▒▒▒▒▓▓▓▓▓▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▒▓▓▓▒▒▓▒▒▒▒▒▒▓▓▓▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▓▒▒▓▓▒▒▓▓▒▓▓▒▒▒▒▒▓▓▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒&nbsp▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▓▓▒▒▓▓▓▒▒▓▓▒▒▓▒▒▒▒▒▓▓▓▒▒&nbsp&nbsp&nbsp▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒&nbsp&nbsp&nbsp▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▓▓▓▒▒▓▓▒▒▓▓▒▒▒▒▓▓▓▓▒&nbsp&nbsp&nbsp&nbsp▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▒▓▓▒▓▓▒▒▓▒▒▒▓▒▒▒▒▓▓▓▓▓▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▒▓▓▒▒▒▓▓▒▒▓▓▓▓▒▒▓▓█▓▓▓▓▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▒▓▓▓▓▓█▓▓▓▓▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▒▓▓▒▒▒▒▓▓▓▒▒▓▓▓▓▓██████▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓███▓▓▓▓▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▒▓▓▒▒▒▒▓▓▓▒▒▓▓▒▓████████▓▒&nbsp▒▒▒▒▒▒▒▒&nbsp▒▒▓███████▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▒▓▓▒▒▒▒▓▒▒▒▒▓▒▒▓█████████▓▒▒▒▒▒▒▒▒▒▓▓▓███████████▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▓▓▒▒▒▓▓▒▒▓▓▒▒▒▒▓▒▓▓███████████▓▓▒▒▓▓▓▓████████████▓█▓▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▓▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▒▓▓▒▒▓▓▓▓▓▓▓▒▒▒▓▒▓▓▓██████████▓▓▓▓▓▓▓▓██████████▓▓▓▓▒▒▒▓▓▓▓▓▒▒▒▒▒▓▓▓▓▓▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒▓▓▓▓▓█████████▓▓▓▓▓▓▓▓▓████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓█▓▓▓▓▓▓▓▓▓█▓▓▓▓▓███████▓▓▓▓▓▓██▓▓▓▓▓▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▓▓▓▓████▓▓▓▓▓█▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓█▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  </div>
+  <!-- Dark pink text called "weclometxt" that gives a basic into to myself -->
+  <div class="welcometxt">Hi, I'm Alex.</div>
+  <div class="welcometxt">Welcome to my website.</div>
+  <div class="welcometxt">
+    Above this if you couldn't tell is an ascii image of me, and below is a list of blogposts and then below that is a terminal emulator.
+    If you now how to, I would sudgest having a play with the file system inside the terminal emulator.
+    Have fun :)
+  </div>
+  <br />
+  <!--Fake text that shows that the not working blogposts command has been entered-->
+  <p class="welcomecommand">
+    <span class="guest">guest</span>@alex-berry.net:~$ blogposts
+  </p>
+  <br />
+  <!--Fake output of blogposts command-->
+  <div class="welcometxt">
+    Here are a list of blog posts (and some tutorials) for the projects I've
+    done:
+  </div>
+  <br />
+  <!-- Code that lists all the blog posts -->
+  <section>
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <FormattedDate date={post.data.pubDate} />-
+            <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <br />
+  <!-- Text that gives some starter commands for new users -->
+  <p class="frlistofcmds">
+    <br />For a list of the commands, type
+    <span class="help-txt">"help"</span>, for some info about me, type
+    <span class="help-txt">"aboutme"</span>.
+  </p>
+  <br />
+  <div class="content"></div>
 
-
-    <div id="txt">
-      <p class="path">guest@alex-berry.net:~$</p>
-      <div class="cursor">
-        <input type="text" class="txt-input" autofocus >
-        <i></i>
-      </div>
+  <!--Input field-->
+  <div id="txt">
+    <p class="path">guest@alex-berry.net:~$</p>
+    <div class="cursor">
+      <input type="text" class="txt-input" autofocus />
+      <i></i>
     </div>
-
-
+  </div>
 </section>
-
-<style >
-:global(*){
+<!-- CSS -->
+<style>
+  :global(*) {
     margin: 0;
     padding: 0;
-    font-family: 'Inconsolata', monospace;
-    background: #211D1B;
+    font-family: "Inconsolata", monospace;
+    background: #211d1b;
     position: relative;
-    
-}
+  }
 
-.terminal{
- padding: 50px ;
-}
+  .terminal {
+    padding: 50px;
+  }
 
-a {
-  color: #1793d0;
-}
+  a {
+    color: #1793d0;
+  }
 
-body{
+  body {
     color: #34be5b;
-    background: #211D1B;
+    background: #211d1b;
     width: 100vw;
-}
+  }
 
-.welcomecommand {
-   display: block;
-   position: relative;
-}
+  .welcomecommand {
+    display: block;
+    position: relative;
+  }
 
-:global(.asciime){
+  :global(.asciime) {
     position: relative;
     font-family: monospace;
     white-space: pre;
-    font-size: 1.5em;
+    font-size: .8em;
     color: #1793d0;
     text-align: center;
-}
+  }
 
-:global(.welcometxt){
+  :global(.welcometxt) {
     position: relative;
     font-family: monospace;
     font-size: 1.25em;
     color: #ffb6c1;
     text-align: center;
-}
+  }
 
-.txtt {
-    display: relative;
-    margin: 0;
-    letter-spacing: 0.05em; 
-    width: max-content;
-}
-
-.frlistofcmds {
+  .frlistofcmds {
     position: relative;
     padding-bottom: 0.4em;
-    color: 	#DB6A6C;
+    color: #db6a6c;
     text-align: left;
-}
+  }
 
-.help-txt {
-    color: #506F95;
-}
+  .help-txt {
+    color: #506f95;
+  }
 
-#txt {
-  display: flex;
-  padding: 10px;
-}
+  #txt {
+    display: flex;
+  }
 
-.txt-input {
-  margin-top: 1px;
-  margin-left: 7px;
-  width: 100%;
-  outline: none;
-  border: none;
-  background-color: transparent;
-  color: #1793d0;
-  font-size: 1em;
-  flex: 1;
-}
+  .txt-input {
+    margin-top: 1px;
+    margin-left: 7px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #1793d0;
+    font-size: 1em;
+    flex: 1;
+  }
 
-.cursor {
-  position: relative;
-  flex: 1;
-  display: flex;
-}
-.cursor i {
-  position: absolute;
-  width: 10px;
-  height: 100%;
-  background-color: gray;
-  left: 5px;
-  animation-name: blink;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  opacity: 1;
-}
+  .cursor {
+    position: relative;
+    flex: 1;
+    display: flex;
+  }
+  .cursor i {
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: gray;
+    left: 5px;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    opacity: 1;
+  }
 
-.cursor input:focus + i {
-  display: none;
-}
+  .cursor input:focus + i {
+    display: none;
+  }
 
-@keyframes blink {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
+  @keyframes blink {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 
-.welcome-txt {
+  .welcome-txt {
     position: relative;
     padding-bottom: 0.4em;
-    color: 	#DB6A6C;
-}
- ul{
-  list-style-type:none ;
-  color: 	#1793d0;
-  padding-left: 30%;
- }
-
+    color: #db6a6c;
+  }
+  ul {
+    list-style-type: none;
+    color: #1793d0;
+    padding-left: 30%;
+  }
 </style>
 
-
-
+<!-- Now begin the JS. If this is a teacher marking this have fun reading my jank code :) -->
 <script>
-import type { AstroConfigSchema } from "astro/dist/core/config";
+  import type { AstroConfigSchema } from "astro/dist/core/config";
 
-let input = document.querySelector('.txt-input')as HTMLInputElement;
-let content = document.querySelector('.content')as HTMLElement;
-let clear = document.getElementsByClassName('.clear');
+  import type { ZodAnyDef, string } from "astro/zod";
 
-var directory: string
-let directories_home: string[] = ['Desktop', ' Documents', ' Pictures', ' Videos'];
-let directories_pictures: string[] = ['Photo1.jpg', ' Photo2.png'];
-let directories_documents: string[] = ['CV.txt', ' privatekey.key', ' publickey.key.pub'];
-let directories_desktop: string[] = ['Homework', ' helloworld.txt'];
-let directories_homework: string[] = ['tysm.txt'];
-let directories_videos: string[] = ['Nevergonnagiveyouup.mp4'];
+  // Starts by declearing some basic variable
 
-directory = "Home"
+  let input = document.querySelector(".txt-input") as HTMLInputElement;
+  let content = document.querySelector(".content") as HTMLElement;
+  let clear = document.getElementsByClassName(".clear");
 
-function sleep(ms:any) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+  // The file structure for my file system, created using basicially all objects.
 
-input?.addEventListener('keydown', handleCommand);
+  const directories = {
+    Home: {
+      Desktop: {
+        Homework: {
+          tysm: "Thanks so much for exploring my website.",
+        },
+        helloworld: "Hello World!",
+      },
 
-function handleCommand(event: any) {
-    if(event.key === 'Enter') {
-        if (input !== null) {
-            console.log("enterpressed")
-            const command = input.value
-            console.log(content.innerHTML) 
-            console.log(content.innerHTML)
-            const args = command.split(" ").filter(value => value.length > 0)
-            content.innerHTML += `<p> $ ${command}<br></p>`;
-            executeCommand(args)
-            input.value = ""
-        }
+      Documents: {
+        CV: "Here's the place where hopefully when I can be bothered I'll link to my CV again.",
+
+        privatekey: "test",
+      },
+      Pictures: {},
+      Videos: {
+        Nevergonnagiveyouup: "L",
+      },
+    },
+  };
+
+  //  Sets the current directory to Home
+
+  let currentDirPath: string[] = ["Home"];
+
+  // Unused capability for commands to wait between bits of code
+
+  function sleep(ms: any) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  function escapeHtml(unsafe: string) {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  //  The function that gets the current directory
+
+  function getcurrentdir() {
+    // starts by declaring the checkingDir directory
+    let checkingDir: any = directories;
+    // declares the variable i and sets it to be zero, this by convention, is the variable used for the loop
+    let i = 0;
+    // This is a do while loop because otherwise I had issues getting it to run as a for loop
+    do {
+      // sets dirName to the last  in the path
+      const dirName = currentDirPath[i];
+
+      // sets the contents of checking to dirName
+      checkingDir = checkingDir[dirName];
+      // increments i by 1
+      i++;
+    } while (i < currentDirPath.length);
+    // returns checkingDir
+    return checkingDir;
+  }
+
+  // adds a basic input listener for keydown
+  input?.addEventListener("keydown", handleCommand);
+
+  // The function that takes the inputted command, splits it into the first and second word, gets rid of extra spaces, then executes the executeCommand function with the first and second word as the paramiters as a string
+
+  function handleCommand(event: any) {
+    if (event.key == "Enter") {
+      // A line that just makes sure it doesnt break if the input is null
+      if (input !== null) {
+        // declears a constant command variable and lets it to be the text that was inputed
+        const command = escapeHtml(input.value);
+        // Declears a constant variable args, then splits it and turns it into an array based on spaces
+        const args: any = command
+          .split(" ")
+          .filter((value) => value.length > 0);
+        // adds a line html saying giving the command that has been just run
+        content.innerHTML += `<p>guest@alex-berry.net:~$ ${command}</p><br>`;
+        // executes the command with the paramiters args and sets the input value to empty
+        executeCommand(args);
+        input.value = "";
+      }
     }
-}
+  }
 
+  // The big function that handles commands
+  async function executeCommand(args: string[]) {
+    switch (args[0].toLowerCase()) {
+      // Basic HTML only commands
 
-async function executeCommand(args:string[]) {
-  console.log(directory)  
-  switch (args[0].toLowerCase()) {
-        case "help":
-        
-        content.innerHTML += '<p class="commandresult">Available commands: help, clear, aboutme, neofetch, pwd, CV, ls, sources.</p><br>';
-            break;
-        case "clear":
-            setTimeout(function() {
-                if (content === null) {
-                return}
-                content.innerHTML = '<a id="clear"></a>';
-                const before = document.getElementById("clear");
-              }, 1);
-            break;
-          case "cv":
-        
-        content.innerHTML += '<p class="commandresult"><a href="https://drive.google.com/file/d/1KHfj9ISs_SBIRM0iVSVFcBUlefUYkdab/view?">Here is a link to my CV.<a> I would happily accept advice or if however unlikely you are an emplyeer a job offer. <a href="mailto:me@alex-berry.net">Just email me<a></p><br>';
-            break;   
-        case "aboutme":
+      // Help command
 
+      case "help":
         content.innerHTML +=
-            `<p class="commandresult">Welcome to my website. I am Alex, a WHS student in year 11 in NZ. </p>
-            `
-            content.innerHTML += `<p class="commandresult">I created this website as a kind of portfolio of my tech projects as I discovered that for some of them there isn't really a guide. </p> `
-            content.innerHTML += `<p class="commandresult"><p class="commandresult">Anyway, heres some other links to my profiles and my email.</p>`
-            content.innerHTML += `
+          '<p class="commandresult">Available commands:</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"help" - shows a list of available commands</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"aboutme" - gives some info about me</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"welcome" - displays the weclome text again</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"aboutme" - gives some info about me</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"cv" - gives a link to my CV/resume with some info taken out</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">For these next commands I have tried to do a VERY basic simulation of a linux filesystem. In future I plan to make it better but like the rest of the website it is a work in progress. You can navigate it using these commands:</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"pwd" - Prints the working directory (shows the folder you are in)</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"ls" - lists all the folders and/or files inside the current directory.</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"cd" - changes the current directory/folder you are in, this is to be used but typing "cd (the folder name you want to navigate to that is inside the current folder)" or "cd /Home/guest/(What directory you want to naviagte to)/(the optional directory that may be inside the directroy)" and if you want to go up a directory use "cd .." Please note, the folder names must be case sensitive. (This is an intentional design decision.)</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"cat" - views the contents of a text file. This is to be done by typing "cat (name of text file excluding the .txt)"</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">"touch" - creates a new empty text file. This is do me done by typing "touch (Name of text file you want to create excluding .txt)"</p><br>';
+          content.innerHTML +=
+          '<p class="commandresult">"mkdir" - creates a new directory with empty contents. This is to be done by typing "mkdir (Name of directory you want to create)"</p><br>';
+          content.innerHTML +=
+          '<p class="commandresult">"append" - appends text ypou specify to a text file you specify. This is to be done by doing append (Name of text file exluding .txt) (Text you want to append)</p><br>';
+          content.innerHTML +=
+          '<p class="commandresult">"clear" - clears all commands above</p><br>';
+        content.innerHTML +=
+          '<p class="commandresult">Commands are case insensitive but locations of folders for "cd" and names of text files for the text file commands are not.</p><br>';
+        break;
+
+      // cv command
+
+      case "cv":
+        content.innerHTML +=
+          '<p class="commandresult"><a href="https://drive.google.com/file/d/1KHfj9ISs_SBIRM0iVSVFcBUlefUYkdab/view?">Here is a link to my CV.<a> I would happily accept advice or if however unlikely you are an emplyeer a job offer. <a href="mailto:me@alex-berry.net">Just email me<a></p><br>';
+        break;
+
+      // About me command
+
+      case "aboutme":
+        content.innerHTML += `<p class="commandresult">Welcome to my website. I am Alex, a WHS student in year 11 in NZ. </p>
+            `;
+        content.innerHTML += `<p class="commandresult">I created this website as a kind of portfolio of my tech projects as I discovered that for some of them there isn't really a guide. </p> `;
+        content.innerHTML += `<p class="commandresult"><p class="commandresult">Anyway, heres some other links to my profiles and my email.</p>`;
+        content.innerHTML += `
             <a href="https://github.com/AlexBerry0">Github<a>
             <br><a href="https://instagram.com/alex_berry_0">Instagram<a>
-            <br><a href="mailto:me@alex-berry.net">Email<a>`
+            <br><a href="mailto:me@alex-berry.net">Email<a>`;
 
-          break;
-
-        case "demo":
-        
-        content.innerHTML += '<p class="commandresult">demo</p><br>';
-        break;
-        
-        case "neofetch":
-        
-        content.innerHTML += '<p class="commandresult">underconstuction</p><br>';
         break;
 
-        case "sources":
-        
-        content.innerHTML += '<p class="commandresult">underconstuction</p><br>';
+      // Permintly unlisted demo command that I use as a template for new commands that I've left in as a secret command
+
+      case "demo":
+        content.innerHTML += '<p class="commandresult">Hello :)</p><br>';
         break;
 
-        case "welcome":
-        
+      // currently unlisted and not working neofetch command
+
+      case "neofetch":
+        content.innerHTML +=
+          '<p class="commandresult">underconstuction</p><br>';
+        break;
+
+      // sources command
+
+      case "sources":
+        content.innerHTML +=
+          '<p class="commandresult">I have a lot of people to credit for help and/or inspiration here a list of some of them and where it is relavent links to their stuff.</p><br>';
+        content.innerHTML += `<a href="https://github.com/TufoT">TufoT</a><p class="commandresult"></p> For inspiration for the websites styling from their CMDo project.</p><br>`;
+        content.innerHTML += `<a href="https://github.com/zadeviggers">Zade<a/><p class="commandresult"></p> For general help with all my stupid Astro and JS questions.</p><br>`;
+        content.innerHTML += `<a href="https://astro.build/">Astro<a/><p class="commandresult"></p> For use of their web framework and bits of their blog theme for the blog section of my website.</p><br>`;
+        content.innerHTML += `<a href="https://chat.openai.com">GPT-4<a/><p class="commandresult"></p>For help teaching me how to write code, but never explicitly writing the code for this website.</p><br>`;
+
+        break;
+        break;
+
+      // Welcome command
+
+      case "welcome":
         content.innerHTML += `
         <section class="terminal">
-<br>
-    <p class="welcomecommand"><span class="guest">guest</span>@alex-berry.net:~$ welcome</p>
     <br>
     <div class="asciime">
-    llcccccclll 
-    lolllccc clllllc 
-   oolloodkO0kdoooll 
-   cll ood0NNNXOol  olc  
-   cllc lookKNNX0kxl  lllc  
-   ooclll  lkxkKNX0kkko  lolllc  
-    llllooo  O0KXNNK0KXKd  loooollc  
-   ccclllo  lOXXXXKKXNKo  loooolllc 
-   ccccllcl   lOXXXXXX0d  cllooolllc 
-  ccllllccc    dO0000Oo    llooooooc 
-  cllolllc,.  .cxkkkkxl     ccloooc 
-  cllllloc,.   .,.ol.'..   ., ccllllc  
-  cccl...,..  .............,,'',lllc 
-,..''..''.......................'lcl 
-,................................., 
-..................................' 
-'...................................,
-....................................' 
-'.....................................,
-,......................................' 
-'.......................................
-        </div>
+                                         ▒▒▒▒▒▓▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒                                    
+                                       ▒▓▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▓▒                                 
+                                    ▒▒▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒                                
+                                  ▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▓▒                              
+                                 ▓▒▒▒▓▒▒▒▒▒▒▒▓▒▒▒▒▓▓▒▒▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▓▒                            
+                                 ▓▒▓▓▒▒▒▒▒▒▓▓▒▒▒▒▓▒     ▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▓▒                           
+                                 ▓▓▓▒▒▒▒▓▓▒▒▒▒▒▒▓▒      ▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒                          
+                                 ▓▓▒▒▒▒▓▓▒▒▒▒▒▒▓▒        ▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▓                          
+                                ▓▒▓▒▒▒▓▓▒▒▒▒▒▓▓▒▒         ▒▒▓▓▓▒▒▒▒▒▒▒▒▒▒▓▒                         
+                               ▓▒▓▓▒▒▒▓▓▓▒▓▓▓▒▒  ▒      ▒▒▒▒▒▒▓▓▒▒▒▒▒▒▒▒▒▒▓▒                        
+                             ▒▓▒▓▓▒▒▒▓▓▓▓▓▒▒▒▒▓▒▒▒   ▒▒▒▓▒▓▒▒▒▓▓▓▒▒▒▒▒▒▒▒▒▒▒▓▒▒                     
+                          ▒▒▓▓▓▓▓▒▒▒▒▓▓▓▓▓▒▒▒ ▒▒▒    ▒▒ ▒▒▒ ▒▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▓▒                    
+                       ▒▓▒▒▒▓▓▒▒▒▒▒▒▒▓▓▓▓▓▒▒▒▒▒▒▒    ▒▒ ▒▒▒▒ ▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓                   
+                       ▓▒▒▒▒▓▓▒▒▒▒▒▒▒▓▓▓▓▓▒▒         ▒▒      ▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒▓▒              
+                       ▒▓▒▒▓▓▓▒▒▓▒▒▒▒▒▒▓▓▓▒▒          ▒      ▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓              
+                     ▒▒▓▒▒▓▓▒▒▓▓▒▓▓▒▒▒▒▒▓▓▒▒      ▒▒ ▒       ▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒               
+                   ▒▒▓▓▒▒▓▓▓▒▒▓▓▒▒▓▒▒▒▒▒▓▓▓▒▒   ▒      ▒▒   ▒▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒                
+                      ▒▓▒▓▓▓▒▒▓▓▒▒▓▓▒▒▒▒▓▓▓▓▒    ▒▒▒▒▒     ▒▓▓▓▓▓▓▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒               
+                    ▒▓▒▒▓▓▒▓▓▒▒▓▒▒▒▓▒▒▒▒▓▓▓▓▓▒▒           ▒▓▓▓▓▓▓▓▓▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓              
+                   ▒▓▒▒▓▓▒▒▒▓▓▒▒▓▓▓▓▒▒▓▓█▓▓▓▓▒▒▒▒▒     ▒▒▒▓▓▓▓▓█▓▓▓▓▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒              
+                  ▒▓▒▒▓▓▒▒▒▒▓▓▓▒▒▓▓▓▓▓██████▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓███▓▓▓▓▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒               
+                  ▒▓▒▒▓▓▒▒▒▒▓▓▓▒▒▓▓▒▓████████▓▒ ▒▒▒▒▒▒▒▒ ▒▒▓███████▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒               
+                  ▒▓▒▒▓▓▒▒▒▒▓▒▒▒▒▓▒▒▓█████████▓▒▒▒▒▒▒▒▒▒▓▓▓███████████▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒              
+                ▒▒▓▓▒▒▒▓▓▒▒▓▓▒▒▒▒▓▒▓▓███████████▓▓▒▒▓▓▓▓████████████▓█▓▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▓▒▒▓▒         
+                ▒▒▒▓▓▒▒▓▓▓▓▓▓▓▒▒▒▓▒▓▓▓██████████▓▓▓▓▓▓▓▓██████████▓▓▓▓▒▒▒▓▓▓▓▓▒▒▒▒▒▓▓▓▓▓▓▒          
+                   ▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒▓▓▓▓▓█████████▓▓▓▓▓▓▓▓▓████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒            
+                    ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓█▓▓▓▓▓▓▓▓▓█▓▓▓▓▓███████▓▓▓▓▓▓██▓▓▓▓▓▓▓▓                    
+                 ▒▓▓▓▓▓▓▓▓▓▓▓▓████▓▓▓▓▓█▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▒                   
+                ▒▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓                   
+                ▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓                  
+               ▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒                 
+               ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓                 
+              ▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▒                
+             ▒▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓                
+             ▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█                
+            ▒▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▒               
+            ▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓               
+           ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▒              
+           ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓              
+          ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓█▒             
+          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓             
+         ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓             
+       </div>
         <div class="welcometxt">
 Hi, I'm Alex.
 </div>
@@ -330,7 +475,9 @@ Hi, I'm Alex.
 Welcome to my website. 
 </div>
 <div class="welcometxt">
-It's not good but it's something. Which is what matters I guess.
+  Above this if you couldn't tell is an ascii image of me, and below is a list of blogposts and then below that is a terminal emulator.
+    If you now how to, I would sudgest having a play with the file system inside the terminal emulator.
+    Have fun :)
         </div>
         
         
@@ -338,181 +485,191 @@ It's not good but it's something. Which is what matters I guess.
         `;
         break;
 
-        case "blogposts":
-        
+      // Unlisted not working blogposts command because it would require an almost compleate rewrite of this page
+
+      case "blogposts":
         content.innerHTML += `<p class="commandresult">I'm sorry, I have tried for over 2 hours, making this command repeatable is just too hard, maybe in the future I will fix it but for now I can't be bothered. TYSM for understanding.</p><br>`;
         break;
 
-        case "pwd":
-        
-        if (directory == "Home") {
-        content.innerHTML += '<p class="commandresult">/home/guest</p><br>';
-        console.log(directory)
-        }
-        
-        if (directory == "Pictures") {
-        content.innerHTML += '<p class="commandresult">/home/guest/Pictures</p><br>';
-        console.log(directory)
-        }        
-        
-        if (directory == "Documents") {
-        content.innerHTML += '<p class="commandresult">/home/guest/Documents</p><br>';
-        console.log(directory)
-        }
-        
-        if (directory == "Desktop") {
-        content.innerHTML += '<p class="commandresult">/home/guest/Desktop</p><br>';
-        }
-        
-        if (directory == "Videos") {
-        content.innerHTML += '<p class="commandresult">/home/guest/Videos</p><br>';
-        }
-        
-        if (directory == "Homework") {
-          console.log(directory)
-        content.innerHTML += '<p class="commandresult">/home/guest/Desktop/Homework</p><br>';
-        }
-        break;
-        
-        case "ls":
-        
-        if (directory == "Home") {
-        content.innerHTML += `<p class="commandresult">${directories_home}<br></p>`;
-        console.log(directory)
-        }
-        
-        if (directory == "Pictures") {
-        content.innerHTML += `<p class="commandresult">${directories_pictures}<br></p>`;
-        console.log(directory)
-        }        
-        
-        if (directory == "Documents") {
-        content.innerHTML += `<p class="commandresult">${directories_documents}<br></p>`;
-        console.log(directory)
-        }
-        
-        if (directory == "Desktop") {
-        content.innerHTML += `<p class="commandresult">${directories_desktop}<br></p>`;
-        }
-        
-        if (directory == "Videos") {
-        content.innerHTML += `<p class="commandresult">${directories_videos}<br></p>`;
-        }
-        
-        if (directory == "Homework") {
-          console.log(directory)
-        content.innerHTML += `<p class="commandresult">${directories_homework}<br></p>`;
-        }
-        break;
-        
+      // More complex commands
 
+      // clear command
 
-              case "cd":
-              switch (args[1]) {
-                case "Home":
-              console.log(args[1])
-              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest"</p>';
-              break;
-                case "Pictures":
-              console.log(args[1])
-              if (directory == "Home") {
-              directory = "Pictures"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Pictures</p>';
-              }
-              else {
-              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Pictures"</p>';
-              }
-              break;
-                case "Desktop":
-              console.log(args[1])
-              if (directory == "Home") {
-              directory = "Desktop"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop</p>';
-              }
-              else {
-              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Desktop"</p>';
-              }
-              break;
-                case "Documents":
-              console.log(args[1])
-              if (directory == "Home") {
-              directory = "Documents"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Documents</p>';
-              }
-              else{
-              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Documents"</p>';
-              }
-              break;
-                case "Videos":
-              console.log(args[1])
-              if (directory == "Home") {
-              directory = "Videos"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Videos</p>';
-              }
-              else{
-              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Videos"</p>';
-              }
-              break;
-                case "Homework":
-              console.log(args[1])
-              if (directory == "Desktop") {
-              directory = "Homework"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop/Homework</p>';
-              }
-              else{
-              content.innerHTML += '<p class="commandresult">No such file or directory in this folder, Did you mean "/Home/guest/Desktop/Homework"</p>';
-              }
-              break;
-                case "/Home/guest":
-              console.log(args[1])
-              directory = "Home"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest</p>';
-              break;
-                case "/Home/guest/Pictures":
-              console.log(args[1])
-              directory = "Pictures"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Pictures</p>';
-              break;
-                case "/Home/guest/Desktop":
-              console.log(args[1])
-              directory = "Desktop"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop</p>';
-              break;
-                case "/Home/guest/Documents":
-              console.log(args[1])
-              directory = "Documents"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Documents</p>';
-              break;
-                case "/Home/guest/Videos":
-              console.log(args[1])
-              directory = "Videos"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Videos</p>';
-              break;
-                case "/Home/guest/Desktop/Homework":
-              console.log(args[1])
-              directory = "Homework"
-              content.innerHTML += '<p class="commandresult">You are now in /Home/guest/Desktop/Homework</p>';
-              break;
-
-              default:
-              if (content === null) {
-                      return}
-                  content.innerHTML += `<p class="commandresult">No such file or directory called ${args[1]} in this folder, type ls for a list of folders, or use "cd /Home/guest" to go back to Home.<br></p>`;
-                  break;
-              }
+      case "clear":
+        // clears all inner html items
+        content.innerHTML = '<a id="clear"></a>';
+        const before = document.getElementById("clear");
         break;
 
+      case "echo":
+        // Remove the 'echo' command
+        args.shift();
 
+        // Join the remaining args into a single string
+        const commandtoecho = args.join(" ");
 
+        if (commandtoecho !== undefined) {
+          content.innerHTML += `${escapeHtml(commandtoecho)}<br>`;
+        }
+        break;
 
+      // Commands that are about the file system
 
-        default:
-            content.innerHTML += `Unknown command: ${args[0]}, for a list of commands type help.<br>`;
-            break;
+      // The cd or Change directery command
+      case "cd": {
+        // Calls the function getcurrentdir and then sets the const currentDir to the result
+        const currentDir = getcurrentdir();
+        // if the contents of dirName include the inputed folder (args[1]) then push the contents of args[1] current dir path
+        // if the contetns of the inputed folder to switch to is ".." then take the last item out of the currentDirPath array and give the Directory that the user is now in
+        if (args[1] == "..") {
+          if (currentDirPath.length == 1) {
+            content.innerHTML += `Permission Denied`;
+          } else {
+            currentDirPath.pop();
+            content.innerHTML += `You are now in /${currentDirPath.join("/")}`;
+          }
+        }
+        // If thats not the case then if the contents of the inputed directory to switch to starts with / then begin the code for navigating to a folder based
+        else if (args[1].startsWith("/")) {
+          const commandWithoutFirstCharacter = args[1].substring(1);
+          const splitUpCommand = commandWithoutFirstCharacter.split("/");
+
+          let checkingDir: any = directories;
+          let tempPath: string[] = [];
+
+          for (let i = 0; i < splitUpCommand.length; i++) {
+            const dirName = splitUpCommand[i];
+
+            if (checkingDir[dirName] != null) {
+              checkingDir = checkingDir[dirName];
+              tempPath.push(dirName);
+              console.log(currentDirPath);
+            } else {
+              console.warn("Folder not found");
+              content.innerHTML += `Folder: ${args[1]} can't be found. If you want to go up a directory try "cd .." or if you are unsure of how to use this command look at the help menu.`;
+
+              return;
+            }
+          }
+
+          // If we get here, all directories in the path exist, so we can update currentDirPath
+          currentDirPath = tempPath;
+          console.log(`You are now in /${currentDirPath.join("/")}`);
+          content.innerHTML += `You are now in /${currentDirPath.join("/")}`;
+          // If the first charecter is not / then if the directory the user specified is one of the objects within the current Directory then push the directory the user specified to the currentDirPath
+        } else if (Object.keys(currentDir).includes(args[1])) {
+          currentDirPath.push(args[1]);
+          content.innerHTML += `You are now in /${currentDirPath.join("/")}`;
+        }
+        // And if that isn't the case then this says the folder wasn't found and gives some help
+        else {
+          console.warn("Folder not found");
+          content.innerHTML += `Folder: ${args[1]} can't be found. If you want to go up a directory try "cd .." or if you are unsure of how to use this command look at the help menu.`;
+        }
+
+        break;
+      }
+      // The pwd or Print working directory command
+      case "pwd":
+        // logs the currentDirPath in text format
+        content.innerHTML += `You are in /${currentDirPath.join("/")}`;
+        break;
+
+      // The ls or list command
+      case "ls": {
+        const currentDir = getcurrentdir();
+
+        // Get keys of the current directory
+        const itemsInDir = Object.keys(currentDir);
+
+        // Go through each item in the directory
+        itemsInDir.forEach((item) => {
+          // Check if the current item is a string (file)
+          if (typeof currentDir[item] === "string") {
+            // It's a file, append .txt to its name
+            content.innerHTML += `${item}.txt<br>`;
+          } else {
+            // It's a directory, leave the name as is
+            content.innerHTML += `${item}<br>`;
+          }
+        });
+        break;
+      }
+
+      // The mkdir or make directory command
+      case "mkdir": {
+        // Check if a directory name is provided
+        if (args.length < 2) {
+          content.innerHTML += "Error: Directory name not provided<br>";
+          break;
+        }
+
+        const currentDir = getcurrentdir();
+        const newDirName = args[1];
+
+        // Check if the directory already exists
+        if (currentDir[newDirName]) {
+          content.innerHTML += `Error: Directory '${newDirName}' already exists<br>`;
+          break;
+        }
+
+        // Create the new directory
+        currentDir[newDirName] = {};
+        break;
+      }
+
+      // The cat command
+
+      case "cat": {
+        const currentDir = getcurrentdir();
+
+        // Check if the file exists in the current directory
+        if (typeof currentDir[args[1]] === "string") {
+          const fileContent = currentDir[args[1]];
+          content.innerHTML += `<p>${escapeHtml(fileContent)}</p><br>`;
+        } else {
+          console.warn("File not found");
+          content.innerHTML += `File: ${args[1]} can't be found. If you are unsure of how to use this command look at the help menu.`;
+        }
+
+        break;
+      }
+
+      case "append": {
+        const currentDir = getcurrentdir();
+
+        // Check if the file exists in the current directory
+        if (typeof currentDir[args[1]] === "string") {
+          const textToAppend = args.slice(2).join(" "); // Get the rest of the command
+          currentDir[args[1]] += textToAppend;
+          content.innerHTML += `Appended to file: ${args[1]}`;
+        } else {
+          console.warn("File not found");
+          content.innerHTML += `File: ${args[1]} can't be found. If you are unsure of how to use this command look at the help menu.`;
+        }
+
+        break;
+      }
+
+      case "touch": {
+        const currentDir = getcurrentdir();
+
+        // Check if the file exists in the current directory
+        if (currentDir[args[1]]) {
+          console.warn("File already exists");
+          content.innerHTML += `File: ${args[1]} already exists.`;
+        } else {
+          currentDir[args[1]] = ""; // Create an empty file
+          content.innerHTML += `Created file: ${args[1]}`;
+        }
+
+        break;
+      }
+
+      default:
+        content.innerHTML += `Unknown command: ${args[0]}, for a list of commands type help.`;
+        content.innerHTML += `<br>`;
+        break;
     }
-}
-
-
-
-
+  }
 </script>
