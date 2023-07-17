@@ -9,17 +9,18 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
+
 <!-- Intro text/Welcome command -->
 <section class="terminal">
   <br />
   <!--Fake text that shows that the welcome command has been entered-->
-  <p class="welcomecommand">
+  <p class="welcomeCommand">
     <span class="guest">guest</span>@alex-berry.net:~$ welcome
   </p>
-  <br />
+  <br/>
 
   <!--ascii art of my face-->
-  <div class="asciime">
+  <div class="asciiMe">
     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▒▒▒▓▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▓▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▒▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -64,21 +65,21 @@ const posts = (await getCollection("blog")).sort(
     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
   </div>
   <!-- Dark pink text called "weclometxt" that gives a basic into to myself -->
-  <div class="welcometxt">Hi, I'm Alex.</div>
-  <div class="welcometxt">Welcome to my website.</div>
-  <div class="welcometxt">
+  <div class="welcomeText">Hi, I'm Alex.</div>
+  <div class="welcomeText">Welcome to my website.</div>
+  <div class="welcomeText">
     Above this if you couldn't tell is an ascii image of me, and below is a list of blogposts and then below that is a terminal emulator.
-    If you now how to, I would sudgest having a play with the file system inside the terminal emulator.
+    If you know how to, I would sudgest having a play with the file system inside the terminal emulator.
     Have fun :)
   </div>
   <br />
   <!--Fake text that shows that the not working blogposts command has been entered-->
-  <p class="welcomecommand">
+  <p class="welcomeCommand">
     <span class="guest">guest</span>@alex-berry.net:~$ blogposts
   </p>
   <br />
   <!--Fake output of blogposts command-->
-  <div class="welcometxt">
+  <div class="welcomeText">
     Here are a list of blog posts (and some tutorials) for the projects I've
     done:
   </div>
@@ -92,16 +93,17 @@ const posts = (await getCollection("blog")).sort(
             <FormattedDate date={post.data.pubDate} />-
             <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
           </li>
+
         ))
       }
     </ul>
   </section>
   <br />
   <!-- Text that gives some starter commands for new users -->
-  <p class="frlistofcmds">
+  <p class="actualListCmds">
     <br />For a list of the commands, type
-    <span class="help-txt">"help"</span>, for some info about me, type
-    <span class="help-txt">"aboutme"</span>.
+    <span class="help-Text">"help"</span>, for some info about me, type
+    <span class="help-Text">"aboutme"</span>.
   </p>
   <br />
   <div class="content"></div>
@@ -110,7 +112,7 @@ const posts = (await getCollection("blog")).sort(
   <div id="txt">
     <p class="path">guest@alex-berry.net:~$</p>
     <div class="cursor">
-      <input type="text" class="txt-input" autofocus />
+      <input type="text" class="txt-Input" autofocus />
       <i></i>
     </div>
   </div>
@@ -125,6 +127,18 @@ const posts = (await getCollection("blog")).sort(
     position: relative;
   }
 
+  li {
+    margin-top: 1%;
+    margin-left: 7px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #1793d0;
+    font-size: 1em;
+    flex: 1;
+  }
+
   .terminal {
     padding: 50px;
   }
@@ -136,15 +150,14 @@ const posts = (await getCollection("blog")).sort(
   body {
     color: #34be5b;
     background: #211d1b;
-    width: 100vw;
   }
 
-  .welcomecommand {
+  .welcomeCommand {
     display: block;
     position: relative;
   }
 
-  :global(.asciime) {
+  :global(.asciiMe) {
     position: relative;
     font-family: monospace;
     white-space: pre;
@@ -153,7 +166,7 @@ const posts = (await getCollection("blog")).sort(
     text-align: center;
   }
 
-  :global(.welcometxt) {
+  :global(.welcomeText) {
     position: relative;
     font-family: monospace;
     font-size: 1.25em;
@@ -161,14 +174,14 @@ const posts = (await getCollection("blog")).sort(
     text-align: center;
   }
 
-  .frlistofcmds {
+  .actualListCmds {
     position: relative;
     padding-bottom: 0.4em;
     color: #db6a6c;
     text-align: left;
   }
 
-  .help-txt {
+  .help-Text {
     color: #506f95;
   }
 
@@ -176,7 +189,7 @@ const posts = (await getCollection("blog")).sort(
     display: flex;
   }
 
-  .txt-input {
+  .txt-Input {
     margin-top: 1px;
     margin-left: 7px;
     width: 100%;
@@ -218,7 +231,7 @@ const posts = (await getCollection("blog")).sort(
     }
   }
 
-  .welcome-txt {
+  .welcomeText {
     position: relative;
     padding-bottom: 0.4em;
     color: #db6a6c;
@@ -238,7 +251,7 @@ const posts = (await getCollection("blog")).sort(
 
   // Starts by declearing some basic variable
 
-  let input = document.querySelector(".txt-input") as HTMLInputElement;
+  let input = document.querySelector(".txt-Input") as HTMLInputElement;
   let content = document.querySelector(".content") as HTMLElement;
   let clear = document.getElementsByClassName(".clear");
 
@@ -338,84 +351,88 @@ const posts = (await getCollection("blog")).sort(
 
       case "help":
         content.innerHTML +=
-          '<p class="commandresult">Available commands:</p><br>';
+          '<p class="commandResult">Available commands:</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"help" - shows a list of available commands</p><br>';
+          '<p class="commandResult">"help" - shows a list of available commands</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"aboutme" - gives some info about me</p><br>';
+          '<p class="commandResult">"aboutme" - gives some info about me</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"welcome" - displays the weclome text again</p><br>';
+          '<p class="commandResult">"welcome" - displays the weclome text again</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"aboutme" - gives some info about me</p><br>';
+          '<p class="commandResult">"aboutme" - gives some info about me</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"cv" - gives a link to my CV/resume with some info taken out</p><br>';
+          '<p class="commandResult">"cv" - gives a link to my CV/resume with some info taken out</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">For these next commands I have tried to do a VERY basic simulation of a linux filesystem. In future I plan to make it better but like the rest of the website it is a work in progress. You can navigate it using these commands:</p><br>';
+          '<p class="commandResult">For these next commands I have tried to do a VERY basic simulation of a linux filesystem. In future I plan to make it better but like the rest of the website it is a work in progress. You can navigate it using these commands:</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"pwd" - Prints the working directory (shows the folder you are in)</p><br>';
+          '<p class="commandResult">"pwd" - Prints the working directory (shows the folder you are in)</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"ls" - lists all the folders and/or files inside the current directory.</p><br>';
+          '<p class="commandResult">"ls" - lists all the folders and/or files inside the current directory.</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"cd" - changes the current directory/folder you are in, this is to be used but typing "cd (the folder name you want to navigate to that is inside the current folder)" or "cd /Home/guest/(What directory you want to naviagte to)/(the optional directory that may be inside the directroy)" and if you want to go up a directory use "cd .." Please note, the folder names must be case sensitive. (This is an intentional design decision.)</p><br>';
+          '<p class="commandResult">"cd" - changes the current directory/folder you are in, this is to be used but typing "cd (the folder name you want to navigate to that is inside the current folder)" or "cd /Home/guest/(What directory you want to naviagte to)/(the optional directory that may be inside the directroy)" and if you want to go up a directory use "cd .." Please note, the folder names must be case sensitive. (This is an intentional design decision.)</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"cat" - views the contents of a text file. This is to be done by typing "cat (name of text file excluding the .txt)"</p><br>';
+          '<p class="commandResult">"cat" - views the contents of a text file. This is to be done by typing "cat (name of text file excluding the .txt)"</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">"touch" - creates a new empty text file. This is do me done by typing "touch (Name of text file you want to create excluding .txt)"</p><br>';
+          '<p class="commandResult">"touch" - creates a new empty text file. This is do me done by typing "touch (Name of text file you want to create excluding .txt)"</p><br>';
           content.innerHTML +=
-          '<p class="commandresult">"mkdir" - creates a new directory with empty contents. This is to be done by typing "mkdir (Name of directory you want to create)"</p><br>';
+          '<p class="commandResult">"mkdir" - creates a new directory with empty contents. This is to be done by typing "mkdir (Name of directory you want to create)"</p><br>';
           content.innerHTML +=
-          '<p class="commandresult">"append" - appends text ypou specify to a text file you specify. This is to be done by doing append (Name of text file exluding .txt) (Text you want to append)</p><br>';
+          '<p class="commandResult">"append" - appends text ypou specify to a text file you specify. This is to be done by doing append (Name of text file exluding .txt) (Text you want to append)</p><br>';
           content.innerHTML +=
-          '<p class="commandresult">"clear" - clears all commands above</p><br>';
+          '<p class="commandResult">"clear" - clears all commands above</p><br>';
         content.innerHTML +=
-          '<p class="commandresult">Commands are case insensitive but locations of folders for "cd" and names of text files for the text file commands are not.</p><br>';
-        break;
+          '<p class="commandResult">Commands are case insensitive but locations of folders for "cd" and names of text files for the text file commands are not.</p><br>';
+          scrollTo(0, document.body.scrollHeight)
+          break;
 
       // cv command
 
       case "cv":
         content.innerHTML +=
-          '<p class="commandresult"><a href="https://drive.google.com/file/d/1KHfj9ISs_SBIRM0iVSVFcBUlefUYkdab/view?">Here is a link to my CV.<a> I would happily accept advice or if however unlikely you are an emplyeer a job offer. <a href="mailto:me@alex-berry.net">Just email me<a></p><br>';
-        break;
+          '<p class="commandResult"><a href="https://drive.google.com/file/d/1KHfj9ISs_SBIRM0iVSVFcBUlefUYkdab/view?">Here is a link to my CV.<a> I would happily accept advice or if however unlikely you are an emplyeer a job offer. <a href="mailto:me@alex-berry.net">Just email me<a></p><br>';
+            scrollTo(0, document.body.scrollHeight)
+            break;
 
       // About me command
 
       case "aboutme":
-        content.innerHTML += `<p class="commandresult">Welcome to my website. I am Alex, a WHS student in year 11 in NZ. </p>
+        content.innerHTML += `<p class="commandResult">Welcome to my website. I am Alex, a WHS student in year 11 in NZ. </p>
             `;
-        content.innerHTML += `<p class="commandresult">I created this website as a kind of portfolio of my tech projects as I discovered that for some of them there isn't really a guide. </p> `;
-        content.innerHTML += `<p class="commandresult"><p class="commandresult">Anyway, heres some other links to my profiles and my email.</p>`;
+        content.innerHTML += `<p class="commandResult">I created this website as a kind of portfolio of my tech projects as I discovered that for some of them there isn't really a guide. </p> `;
+        content.innerHTML += `<p class="commandResult"><p class="commandResult">Anyway, heres some other links to my profiles and my email.</p>`;
         content.innerHTML += `
             <a href="https://github.com/AlexBerry0">Github<a>
             <br><a href="https://instagram.com/alex_berry_0">Instagram<a>
             <br><a href="mailto:me@alex-berry.net">Email<a>`;
+              scrollTo(0, document.body.scrollHeight)
 
         break;
 
       // Permintly unlisted demo command that I use as a template for new commands that I've left in as a secret command
 
       case "demo":
-        content.innerHTML += '<p class="commandresult">Hello :)</p><br>';
+        content.innerHTML += '<p class="commandResult">Hello :)</p><br>';
+        scrollTo(0, document.body.scrollHeight)
         break;
 
       // currently unlisted and not working neofetch command
 
       case "neofetch":
         content.innerHTML +=
-          '<p class="commandresult">underconstuction</p><br>';
+          '<p class="commandResult">underconstuction</p><br>';
+          scrollTo(0, document.body.scrollHeight)
         break;
 
       // sources command
 
       case "sources":
         content.innerHTML +=
-          '<p class="commandresult">I have a lot of people to credit for help and/or inspiration here a list of some of them and where it is relavent links to their stuff.</p><br>';
-        content.innerHTML += `<a href="https://github.com/TufoT">TufoT</a><p class="commandresult"></p> For inspiration for the websites styling from their CMDo project.</p><br>`;
-        content.innerHTML += `<a href="https://github.com/zadeviggers">Zade<a/><p class="commandresult"></p> For general help with all my stupid Astro and JS questions.</p><br>`;
-        content.innerHTML += `<a href="https://astro.build/">Astro<a/><p class="commandresult"></p> For use of their web framework and bits of their blog theme for the blog section of my website.</p><br>`;
-        content.innerHTML += `<a href="https://chat.openai.com">GPT-4<a/><p class="commandresult"></p>For help teaching me how to write code, but never explicitly writing the code for this website.</p><br>`;
-
-        break;
+          '<p class="commandResult">I have a lot of people to credit for help and/or inspiration here a list of some of them and where it is relavent links to their stuff.</p><br>';
+        content.innerHTML += `<a href="https://github.com/TufoT">TufoT</a><p class="commandResult"></p> For inspiration for the websites styling from their CMDo project.</p><br>`;
+        content.innerHTML += `<a href="https://github.com/zadeviggers">Zade<a/><p class="commandResult"></p> For general help with all my stupid Astro and JS questions.</p><br>`;
+        content.innerHTML += `<a href="https://astro.build/">Astro<a/><p class="commandResult"></p> For use of their web framework and bits of their blog theme for the blog section of my website.</p><br>`;
+        content.innerHTML += `<a href="https://chat.openai.com">GPT-4<a/><p class="commandResult"></p>For help teaching me how to write code, but never explicitly writing the code for this website.</p><br>`;
+          scrollTo(0, document.body.scrollHeight)
         break;
 
       // Welcome command
@@ -424,7 +441,7 @@ const posts = (await getCollection("blog")).sort(
         content.innerHTML += `
         <section class="terminal">
     <br>
-    <div class="asciime">
+    <div class="asciiMe">
                                          ▒▒▒▒▒▓▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒                                    
                                        ▒▓▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▓▒                                 
                                     ▒▒▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒                                
@@ -468,27 +485,29 @@ const posts = (await getCollection("blog")).sort(
           ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓             
          ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓             
        </div>
-        <div class="welcometxt">
+        <div class="welcomeText">
 Hi, I'm Alex.
 </div>
-<div class="welcometxt">
+<div class="welcomeText">
 Welcome to my website. 
 </div>
-<div class="welcometxt">
+<div class="welcomeText">
   Above this if you couldn't tell is an ascii image of me, and below is a list of blogposts and then below that is a terminal emulator.
-    If you now how to, I would sudgest having a play with the file system inside the terminal emulator.
+    If you know how to, I would sudgest having a play with the file system inside the terminal emulator.
     Have fun :)
         </div>
         
         
         
         `;
+        scrollTo(0, document.body.scrollHeight)
         break;
 
       // Unlisted not working blogposts command because it would require an almost compleate rewrite of this page
 
       case "blogposts":
-        content.innerHTML += `<p class="commandresult">I'm sorry, I have tried for over 2 hours, making this command repeatable is just too hard, maybe in the future I will fix it but for now I can't be bothered. TYSM for understanding.</p><br>`;
+        content.innerHTML += `<p class="commandResult">I'm sorry, I have tried for over 2 hours, making this command repeatable is just too hard, maybe in the future I will fix it but for now I can't be bothered. TYSM for understanding.</p><br>`;
+        scrollTo(0, document.body.scrollHeight)
         break;
 
       // More complex commands
@@ -499,6 +518,7 @@ Welcome to my website.
         // clears all inner html items
         content.innerHTML = '<a id="clear"></a>';
         const before = document.getElementById("clear");
+        scrollTo(0, document.body.scrollHeight)
         break;
 
       case "echo":
@@ -506,11 +526,12 @@ Welcome to my website.
         args.shift();
 
         // Join the remaining args into a single string
-        const commandtoecho = args.join(" ");
+        const commandToEcho = args.join(" ");
 
-        if (commandtoecho !== undefined) {
-          content.innerHTML += `${escapeHtml(commandtoecho)}<br>`;
+        if (commandToEcho !== undefined) {
+          content.innerHTML += `${commandToEcho}<br>`;
         }
+        scrollTo(0, document.body.scrollHeight)
         break;
 
       // Commands that are about the file system
@@ -524,9 +545,11 @@ Welcome to my website.
         if (args[1] == "..") {
           if (currentDirPath.length == 1) {
             content.innerHTML += `Permission Denied`;
+            scrollTo(0, document.body.scrollHeight)
           } else {
             currentDirPath.pop();
             content.innerHTML += `You are now in /${currentDirPath.join("/")}`;
+            scrollTo(0, document.body.scrollHeight)
           }
         }
         // If thats not the case then if the contents of the inputed directory to switch to starts with / then begin the code for navigating to a folder based
@@ -547,7 +570,7 @@ Welcome to my website.
             } else {
               console.warn("Folder not found");
               content.innerHTML += `Folder: ${args[1]} can't be found. If you want to go up a directory try "cd .." or if you are unsure of how to use this command look at the help menu.`;
-
+              scrollTo(0, document.body.scrollHeight)
               return;
             }
           }
@@ -556,15 +579,18 @@ Welcome to my website.
           currentDirPath = tempPath;
           console.log(`You are now in /${currentDirPath.join("/")}`);
           content.innerHTML += `You are now in /${currentDirPath.join("/")}`;
+          scrollTo(0, document.body.scrollHeight)
           // If the first charecter is not / then if the directory the user specified is one of the objects within the current Directory then push the directory the user specified to the currentDirPath
         } else if (Object.keys(currentDir).includes(args[1])) {
           currentDirPath.push(args[1]);
           content.innerHTML += `You are now in /${currentDirPath.join("/")}`;
+          scrollTo(0, document.body.scrollHeight)
         }
         // And if that isn't the case then this says the folder wasn't found and gives some help
         else {
           console.warn("Folder not found");
           content.innerHTML += `Folder: ${args[1]} can't be found. If you want to go up a directory try "cd .." or if you are unsure of how to use this command look at the help menu.`;
+          scrollTo(0, document.body.scrollHeight)
         }
 
         break;
@@ -588,9 +614,11 @@ Welcome to my website.
           if (typeof currentDir[item] === "string") {
             // It's a file, append .txt to its name
             content.innerHTML += `${item}.txt<br>`;
+            scrollTo(0, document.body.scrollHeight)
           } else {
             // It's a directory, leave the name as is
             content.innerHTML += `${item}<br>`;
+            scrollTo(0, document.body.scrollHeight)
           }
         });
         break;
@@ -601,6 +629,7 @@ Welcome to my website.
         // Check if a directory name is provided
         if (args.length < 2) {
           content.innerHTML += "Error: Directory name not provided<br>";
+          scrollTo(0, document.body.scrollHeight)
           break;
         }
 
@@ -610,6 +639,7 @@ Welcome to my website.
         // Check if the directory already exists
         if (currentDir[newDirName]) {
           content.innerHTML += `Error: Directory '${newDirName}' already exists<br>`;
+          scrollTo(0, document.body.scrollHeight)
           break;
         }
 
@@ -626,10 +656,12 @@ Welcome to my website.
         // Check if the file exists in the current directory
         if (typeof currentDir[args[1]] === "string") {
           const fileContent = currentDir[args[1]];
-          content.innerHTML += `<p>${escapeHtml(fileContent)}</p><br>`;
+          content.innerHTML += `<p>${fileContent}</p><br>`;
+          scrollTo(0, document.body.scrollHeight)
         } else {
           console.warn("File not found");
           content.innerHTML += `File: ${args[1]} can't be found. If you are unsure of how to use this command look at the help menu.`;
+          scrollTo(0, document.body.scrollHeight)
         }
 
         break;
@@ -643,9 +675,11 @@ Welcome to my website.
           const textToAppend = args.slice(2).join(" "); // Get the rest of the command
           currentDir[args[1]] += textToAppend;
           content.innerHTML += `Appended to file: ${args[1]}`;
+          scrollTo(0, document.body.scrollHeight)
         } else {
           console.warn("File not found");
           content.innerHTML += `File: ${args[1]} can't be found. If you are unsure of how to use this command look at the help menu.`;
+          scrollTo(0, document.body.scrollHeight)
         }
 
         break;
@@ -658,9 +692,11 @@ Welcome to my website.
         if (currentDir[args[1]]) {
           console.warn("File already exists");
           content.innerHTML += `File: ${args[1]} already exists.`;
+          scrollTo(0, document.body.scrollHeight)
         } else {
           currentDir[args[1]] = ""; // Create an empty file
           content.innerHTML += `Created file: ${args[1]}`;
+          scrollTo(0, document.body.scrollHeight)
         }
 
         break;
@@ -669,6 +705,7 @@ Welcome to my website.
       default:
         content.innerHTML += `Unknown command: ${args[0]}, for a list of commands type help.`;
         content.innerHTML += `<br>`;
+        scrollTo(0, document.body.scrollHeight)
         break;
     }
   }
