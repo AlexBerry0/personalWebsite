@@ -1,6 +1,4 @@
 ---
-// import BaseHead from "../components/BaseHead.astro";
-// import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 
@@ -478,7 +476,7 @@ Welcome to my website.
         scrollTo(0, document.body.scrollHeight)
         break;
 
-      // Unlisted not working blogposts command because it would require an almost complete rewrite of this page
+      // Unlisted not working "blogposts" command because it would require an almost complete rewrite of this page
 
       case "blogposts":
         content.innerHTML += `<p class="commandResult">I'm sorry, I have tried for over 2 hours, making this command repeatable is just too hard, maybe in the future I will fix it but for now I can't be bothered. TYSM for understanding.</p><br>`;
