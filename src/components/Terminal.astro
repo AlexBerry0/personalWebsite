@@ -243,19 +243,16 @@ const posts = (await getCollection("blog")).sort(
   }
 </style>
 
-<!-- Now begin the JS. If this is a teacher marking this have fun reading my jank code :) -->
 <script>
   import type { AstroConfigSchema } from "astro/dist/core/config";
 
   import type { ZodAnyDef, string } from "astro/zod";
 
-  // Starts by declearing some basic variable
-
   let input = document.querySelector(".txt-Input") as HTMLInputElement;
   let content = document.querySelector(".content") as HTMLElement;
   let clear = document.getElementsByClassName(".clear");
 
-  // The file structure for my file system, created using basicially all objects.
+  // The file structure for my file system, mostly done with objects
 
   const directories = {
     Home: {
@@ -282,12 +279,6 @@ const posts = (await getCollection("blog")).sort(
 
   let currentDirPath: string[] = ["Home"];
 
-  // Unused capability for commands to wait between bits of code
-
-  function sleep(ms: any) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
   function escapeHtml(unsafe: string) {
     return unsafe
       .replace(/&/g, "&amp;")
@@ -297,35 +288,28 @@ const posts = (await getCollection("blog")).sort(
       .replace(/'/g, "&#039;");
   }
 
-  //  The function that gets the current directory
+  //  Function that gets the current directory
 
   function getcurrentdir() {
-    // starts by declaring the checkingDir directory
     let checkingDir: any = directories;
-    // declares the variable i and sets it to be zero, this by convention, is the variable used for the loop
     let i = 0;
-    // This is a do while loop because otherwise I had issues getting it to run as a for loop
     do {
       // sets dirName to the last  in the path
       const dirName = currentDirPath[i];
 
       // sets the contents of checking to dirName
       checkingDir = checkingDir[dirName];
-      // increments i by 1
       i++;
     } while (i < currentDirPath.length);
-    // returns checkingDir
     return checkingDir;
   }
 
-  // adds a basic input listener for keydown
   input?.addEventListener("keydown", handleCommand);
 
   // The function that takes the inputted command, splits it into the first and second word, gets rid of extra spaces, then executes the executeCommand function with the first and second word as the paramiters as a string
 
   function handleCommand(event: any) {
     if (event.key == "Enter") {
-      // A line that just makes sure it doesnt break if the input is null
       if (input !== null) {
         // declears a constant command variable and lets it to be the text that was inputed
         const command = escapeHtml(input.value);
@@ -342,12 +326,11 @@ const posts = (await getCollection("blog")).sort(
     }
   }
 
-  // The big function that handles commands
+  // Function for handling commands
   async function executeCommand(args: string[]) {
     switch (args[0].toLowerCase()) {
-      // Basic HTML only commands
-
-      // Help command
+      
+      // "help" command
 
       case "help":
         content.innerHTML +=
@@ -385,7 +368,7 @@ const posts = (await getCollection("blog")).sort(
           scrollTo(0, document.body.scrollHeight)
           break;
 
-      // cv command
+      // "cv" command
 
       case "cv":
         content.innerHTML +=
@@ -393,7 +376,7 @@ const posts = (await getCollection("blog")).sort(
             scrollTo(0, document.body.scrollHeight)
             break;
 
-      // About me command
+      // "aboutme" command
 
       case "aboutme":
         content.innerHTML += `<p class="commandResult">Welcome to my website. I am Alex, a WHS student in year 11 in NZ. </p>
@@ -408,34 +391,25 @@ const posts = (await getCollection("blog")).sort(
 
         break;
 
-      // Permintly unlisted demo command that I use as a template for new commands that I've left in as a secret command
+      // Permintly unlisted demo command that I used as a template for new commands that I've left in as a secret command
 
       case "demo":
         content.innerHTML += '<p class="commandResult">Hello :)</p><br>';
         scrollTo(0, document.body.scrollHeight)
         break;
 
-      // currently unlisted and not working neofetch command
 
-      case "neofetch":
-        content.innerHTML +=
-          '<p class="commandResult">underconstuction</p><br>';
-          scrollTo(0, document.body.scrollHeight)
-        break;
-
-      // sources command
+      // "sources" command
 
       case "sources":
         content.innerHTML +=
           '<p class="commandResult">I have a lot of people to credit for help and/or inspiration here a list of some of them and where it is relavent links to their stuff.</p><br>';
         content.innerHTML += `<a href="https://github.com/TufoT">TufoT</a><p class="commandResult"></p> For inspiration for the websites styling from their CMDo project.</p><br>`;
         content.innerHTML += `<a href="https://github.com/zadeviggers">Zade<a/><p class="commandResult"></p> For general help with all my stupid Astro and JS questions.</p><br>`;
-        content.innerHTML += `<a href="https://astro.build/">Astro<a/><p class="commandResult"></p> For use of their web framework and bits of their blog theme for the blog section of my website.</p><br>`;
-        content.innerHTML += `<a href="https://chat.openai.com">GPT-4<a/><p class="commandResult"></p>For help teaching me how to write code, but never explicitly writing the code for this website.</p><br>`;
-          scrollTo(0, document.body.scrollHeight)
+        content.innerHTML += `<a href="https://astro.build/">Astro<a/><p class="commandResult"></p> For use of their web framework and bits of their blog theme for the blog section of my website.</p><br>`;          scrollTo(0, document.body.scrollHeight)
         break;
 
-      // Welcome command
+      // "welcome" command
 
       case "welcome":
         content.innerHTML += `
@@ -510,17 +484,17 @@ Welcome to my website.
         scrollTo(0, document.body.scrollHeight)
         break;
 
-      // More complex commands
 
-      // clear command
+      // "clear" command
 
       case "clear":
-        // clears all inner html items
+        // clears all inner HTML items
         content.innerHTML = '<a id="clear"></a>';
         const before = document.getElementById("clear");
         scrollTo(0, document.body.scrollHeight)
         break;
 
+        //  "echo command"
       case "echo":
         // Remove the 'echo' command
         args.shift();
@@ -534,7 +508,7 @@ Welcome to my website.
         scrollTo(0, document.body.scrollHeight)
         break;
 
-      // Commands that are about the file system
+      // File system commands:
 
       // The cd or Change directery command
       case "cd": {
@@ -624,7 +598,7 @@ Welcome to my website.
         break;
       }
 
-      // The mkdir or make directory command
+      // The "mkdir"
       case "mkdir": {
         // Check if a directory name is provided
         if (args.length < 2) {
@@ -648,7 +622,7 @@ Welcome to my website.
         break;
       }
 
-      // The cat command
+      // The "cat" command
 
       case "cat": {
         const currentDir = getcurrentdir();
