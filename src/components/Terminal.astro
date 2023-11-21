@@ -68,8 +68,8 @@ const posts = (await getCollection("blog")).sort(
   <div class="welcomeText">Hi, I'm Alex.</div>
   <div class="welcomeText">Welcome to my website.</div>
   <div class="welcomeText">
-    Above this if you couldn't tell is an ascii image of me, and below is a list of blogposts and then below that is a terminal emulator.
-    If you know how to, I would sudggest having a play with the file system inside the terminal emulator.
+    Above this if you couldn't tell is an ascii image of me, and below is a list of blog-posts and then below that is a terminal emulator.
+    If you know how to, I would suggest having a play with the file system inside the terminal emulator.
     Have fun :)
   </div>
   <br />
@@ -78,7 +78,7 @@ const posts = (await getCollection("blog")).sort(
     <span class="guest">guest</span>@alex-berry.net:~$ blogposts
   </p>
   <br />
-  <!--Fake output of blogposts command-->
+  <!--Fake output of "blogposts" command-->
   <div class="welcomeText">
     Here are a list of blog posts (and some tutorials) for the projects I've
     done:
@@ -270,7 +270,7 @@ const posts = (await getCollection("blog")).sort(
       },
       Pictures: {},
       Videos: {
-        Nevergonnagiveyouup: "L",
+        Nevergonnagiveyouup: "We're no strangers to love. You know the rules and so do I. A full commitment's what I'm thinking of You wouldn't get this from any other guy",
       },
     },
   };
@@ -306,20 +306,20 @@ const posts = (await getCollection("blog")).sort(
 
   input?.addEventListener("keydown", handleCommand);
 
-  // The function that takes the inputted command, splits it into the first and second word, gets rid of extra spaces, then executes the executeCommand function with the first and second word as the paramiters as a string
+  // The function that takes the inputted command, splits it into the first and second word, gets rid of extra spaces, then executes the executeCommand function with the first and second word as the parameters as a string
 
   function handleCommand(event: any) {
     if (event.key == "Enter") {
       if (input !== null) {
-        // declears a constant command variable and lets it to be the text that was inputed
+        // declares a constant command variable and lets it to be the text that was inputted
         const command = escapeHtml(input.value);
-        // Declears a constant variable args, then splits it and turns it into an array based on spaces
+        // Declares a constant variable args, then splits it and turns it into an array based on spaces
         const args: any = command
           .split(" ")
           .filter((value) => value.length > 0);
         // adds a line html saying giving the command that has been just run
         content.innerHTML += `<p>guest@alex-berry.net:~$ ${command}</p><br>`;
-        // executes the command with the paramiters args and sets the input value to empty
+        // executes the command with the parameters args and sets the input value to empty
         executeCommand(args);
         input.value = "";
       }
@@ -340,7 +340,7 @@ const posts = (await getCollection("blog")).sort(
         content.innerHTML +=
           '<p class="commandResult">"aboutme" - gives some info about me</p><br>';
         content.innerHTML +=
-          '<p class="commandResult">"welcome" - displays the weclome text again</p><br>';
+          '<p class="commandResult">"welcome" - displays the welcome text again</p><br>';
         content.innerHTML +=
           '<p class="commandResult">"aboutme" - gives some info about me</p><br>';
         content.innerHTML +=
@@ -360,7 +360,7 @@ const posts = (await getCollection("blog")).sort(
           content.innerHTML +=
           '<p class="commandResult">"mkdir" - creates a new directory with empty contents. This is to be done by typing "mkdir (Name of directory you want to create)"</p><br>';
           content.innerHTML +=
-          '<p class="commandResult">"append" - appends text ypou specify to a text file you specify. This is to be done by doing append (Name of text file exluding .txt) (Text you want to append)</p><br>';
+          '<p class="commandResult">"append" - appends text you specify to a text file you specify. This is to be done by doing append (Name of text file excluding .txt) (Text you want to append)</p><br>';
           content.innerHTML +=
           '<p class="commandResult">"clear" - clears all commands above</p><br>';
         content.innerHTML +=
@@ -372,7 +372,7 @@ const posts = (await getCollection("blog")).sort(
 
       case "cv":
         content.innerHTML +=
-          '<p class="commandResult"><a href="https://drive.google.com/file/d/1KHfj9ISs_SBIRM0iVSVFcBUlefUYkdab/view?">Here is a link to my CV.<a> I would happily accept advice or if however unlikely you are an emplyeer a job offer. <a href="mailto:me@alex-berry.net">Just email me<a></p><br>';
+          '<p class="commandResult"><a href="https://drive.google.com/file/d/1KHfj9ISs_SBIRM0iVSVFcBUlefUYkdab/view?">Here is a link to my CV.<a> I would happily accept advice or if however unlikely you are an employer a job offer. <a href="mailto:me@alex-berry.net">Just email me<a></p><br>';
             scrollTo(0, document.body.scrollHeight)
             break;
 
@@ -391,7 +391,7 @@ const posts = (await getCollection("blog")).sort(
 
         break;
 
-      // Permintly unlisted demo command that I used as a template for new commands that I've left in as a secret command
+      // Permanently unlisted demo command that I used as a template for new commands that I've left in as a secret command
 
       case "demo":
         content.innerHTML += '<p class="commandResult">Hello :)</p><br>';
@@ -403,7 +403,7 @@ const posts = (await getCollection("blog")).sort(
 
       case "sources":
         content.innerHTML +=
-          '<p class="commandResult">I have a lot of people to credit for help and/or inspiration here a list of some of them and where it is relavent links to their stuff.</p><br>';
+          '<p class="commandResult">I have a lot of people to credit for help and/or inspiration here a list of some of them and where it is relevant links to their stuff.</p><br>';
         content.innerHTML += `<a href="https://github.com/TufoT">TufoT</a><p class="commandResult"></p> For inspiration for the websites styling from their CMDo project.</p><br>`;
         content.innerHTML += `<a href="https://github.com/zadeviggers">Zade<a/><p class="commandResult"></p> For general help with all my stupid Astro and JS questions.</p><br>`;
         content.innerHTML += `<a href="https://astro.build/">Astro<a/><p class="commandResult"></p> For use of their web framework and bits of their blog theme for the blog section of my website.</p><br>`;          scrollTo(0, document.body.scrollHeight)
@@ -467,7 +467,7 @@ Welcome to my website.
 </div>
 <div class="welcomeText">
   Above this if you couldn't tell is an ascii image of me, and below is a list of blogposts and then below that is a terminal emulator.
-    If you know how to, I would sudggest having a play with the file system inside the terminal emulator.
+    If you know how to, I would suggest having a play with the file system inside the terminal emulator.
     Have fun :)
         </div>
         
@@ -477,7 +477,7 @@ Welcome to my website.
         scrollTo(0, document.body.scrollHeight)
         break;
 
-      // Unlisted not working blogposts command because it would require an almost compleate rewrite of this page
+      // Unlisted not working blogposts command because it would require an almost complete rewrite of this page
 
       case "blogposts":
         content.innerHTML += `<p class="commandResult">I'm sorry, I have tried for over 2 hours, making this command repeatable is just too hard, maybe in the future I will fix it but for now I can't be bothered. TYSM for understanding.</p><br>`;
@@ -510,12 +510,12 @@ Welcome to my website.
 
       // File system commands:
 
-      // The cd or Change directery command
+      // The cd or Change directory command
       case "cd": {
         // Calls the function getcurrentdir and then sets the const currentDir to the result
         const currentDir = getcurrentdir();
-        // if the contents of dirName include the inputed folder (args[1]) then push the contents of args[1] current dir path
-        // if the contetns of the inputed folder to switch to is ".." then take the last item out of the currentDirPath array and give the Directory that the user is now in
+        // if the contents of dirName include the inputted folder (args[1]) then push the contents of args[1] current dir path
+        // if the contents of the inputted folder to switch to is ".." then take the last item out of the currentDirPath array and give the Directory that the user is now in
         if (args[1] == "..") {
           if (currentDirPath.length == 1) {
             content.innerHTML += `Permission Denied`;
@@ -526,7 +526,7 @@ Welcome to my website.
             scrollTo(0, document.body.scrollHeight)
           }
         }
-        // If thats not the case then if the contents of the inputed directory to switch to starts with / then begin the code for navigating to a folder based
+        // If thats not the case then if the contents of the inputted directory to switch to starts with / then begin the code for navigating to a folder based
         else if (args[1].startsWith("/")) {
           const commandWithoutFirstCharacter = args[1].substring(1);
           const splitUpCommand = commandWithoutFirstCharacter.split("/");
@@ -554,7 +554,7 @@ Welcome to my website.
           console.log(`You are now in /${currentDirPath.join("/")}`);
           content.innerHTML += `You are now in /${currentDirPath.join("/")}`;
           scrollTo(0, document.body.scrollHeight)
-          // If the first charecter is not / then if the directory the user specified is one of the objects within the current Directory then push the directory the user specified to the currentDirPath
+          // If the first character is not / then if the directory the user specified is one of the objects within the current Directory then push the directory the user specified to the currentDirPath
         } else if (Object.keys(currentDir).includes(args[1])) {
           currentDirPath.push(args[1]);
           content.innerHTML += `You are now in /${currentDirPath.join("/")}`;
