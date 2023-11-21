@@ -1,6 +1,6 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+// import BaseHead from "../components/BaseHead.astro";
+// import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 
@@ -247,9 +247,7 @@ const posts = (await getCollection("blog")).sort(
 </style>
 
 <script>
-  import type { AstroConfigSchema } from "astro/dist/core/config";
 
-  import type { ZodAnyDef, string } from "astro/zod";
 
   let input = document.querySelector(".txt-Input") as HTMLInputElement;
   let content = document.querySelector(".content") as HTMLElement;
